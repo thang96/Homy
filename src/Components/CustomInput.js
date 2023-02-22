@@ -1,0 +1,70 @@
+import React from 'react';
+import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
+import {colors, icons} from '../Constants';
+import CustomInputText from './CustomTextInput';
+
+const CustomInput = props => {
+  const {
+    type,
+    styleViewInput,
+    title,
+    placeholder,
+    keyboardType,
+    value,
+    onChangeText,
+    onPress,
+    styleButton,
+  } = props;
+  return (
+    <View style={styleViewInput}>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Text style={styles.label}>{title}</Text>
+        <Text style={{color: 'red', fontSize: 14}}> *</Text>
+      </View>
+      {type == 'input' && (
+        <CustomInputText
+          keyboardType={keyboardType}
+          styleViewTextInput={styles.viewInput}
+          placeholder={placeholder}
+          onChangeText={onChangeText}
+          value={value}
+        />
+      )}
+      {type == 'button' && (
+        <TouchableOpacity
+          onPress={onPress}
+          style={[styles.viewButton, {paddingHorizontal: 10}, styleButton]}>
+          <Text>{value ? value : placeholder}</Text>
+          <Image
+            source={icons.ic_down}
+            resizeMode={'contain'}
+            style={styles.icon}
+          />
+        </TouchableOpacity>
+      )}
+    </View>
+  );
+};
+const styles = StyleSheet.create({
+  label: {fontSize: 15, color: 'black', fontWeight: '500'},
+  viewButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 50,
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 10,
+    alignItems: 'center',
+    borderColor: colors.mainColor,
+    paddingHorizontal: 5,
+  },
+  viewInput: {
+    borderWidth: 1,
+    borderColor: 10,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    backgroundColor: '#f8f9f9',
+  },
+  icon: {width: 20, height: 20},
+});
+export default CustomInput;
