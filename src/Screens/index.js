@@ -6,11 +6,14 @@ import LoginScreen from './Login/LoginScreen';
 import HomeScreen from './Home/HomeSreen';
 //--BuildingManager
 import BuildingManager from './Home/BuildingManager/BuildingManager';
+import UtilitiesManager from './Home/BuildingManager/UtilitiesManager';
+import ServiceManager from './Home/BuildingManager/ServiceManager';
+import ContractManagement from './Home/BuildingManager/ContractManagement/ContractManagement';
+import BillManagement from './Home/BuildingManager/BillManagement/BillManagement';
 import AddBuildings from './Home/BuildingManager/AddBuildings';
 import AddBuildingsStep2 from './Home/BuildingManager/AddBuildingsStep2';
 import AddBuildingsStep3 from './Home/BuildingManager/AddBuildingsStep3';
 import Service from './Home/BuildingManager/Service';
-import ServiceManager from './Home/BuildingManager/ServiceManager';
 import AddService from './Home/BuildingManager/AddService';
 import Utilities from './Home/BuildingManager/Utilities';
 import AddUtilities from './Home/BuildingManager/AddUtilities';
@@ -31,6 +34,10 @@ export {
   HomeScreen,
   //--BuildingManager
   BuildingManager,
+  UtilitiesManager,
+  BuildingInformation,
+  ContractManagement,
+  BillManagement,
   AddBuildings,
   AddBuildingsStep2,
   AddBuildingsStep3,
@@ -39,7 +46,6 @@ export {
   AddService,
   Utilities,
   AddUtilities,
-  BuildingInformation,
   FloorInformation,
   RoomInformation,
   AddRoom,

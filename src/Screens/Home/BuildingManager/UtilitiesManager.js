@@ -12,14 +12,14 @@ import {
   Keyboard,
 } from 'react-native';
 import CustomAppBar from '../../../Components/CustomAppBar';
-import CustomButton from '../../../Components/CustomButton';
 import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
 import {icons, colors} from '../../../Constants';
-import CustomChecker from '../../../Components/CustomChecker';
 import {ScrollView} from 'react-native-virtualized-view';
+import CustomButton from '../../../Components/CustomButton';
+import CustomChecker from '../../../Components/CustomChecker';
 import CustomSearchAppBar from '../../../Components/CustomSearchAppBar';
 
-const ServiceManager = props => {
+const UtilitiesManager = props => {
   const navigation = useNavigation();
   const [keyboard, setKeyboard] = useState(false);
   const [textSearch, setTextSearch] = useState('');
@@ -32,7 +32,6 @@ const ServiceManager = props => {
       setKeyboard(false);
     });
   }, []);
-
   const [listSevice, setListSevice] = useState([
     {label: 'Điện', value: '4000/KWH', isCheck: true},
     {label: 'Nước', value: '5000/M³', isCheck: false},
@@ -56,7 +55,7 @@ const ServiceManager = props => {
     };
     return (
       <CustomChecker
-        icon={icons.ic_paidService}
+        icon={icons.ic_utilities}
         label={item?.label}
         value={item?.value}
         isCheck={item?.isCheck}
@@ -70,7 +69,7 @@ const ServiceManager = props => {
       <KeyboardAvoidingView style={{flex: 1}}>
         <CustomAppBar
           iconLeft={icons.ic_back}
-          label={'Quản lý dịch vụ'}
+          label={'Quản lý tiện ích'}
           iconRight={icons.ic_bell}
           iconSecondRight={icons.ic_moreOption}
           pressIconLeft={() => navigation.goBack()}
@@ -97,7 +96,6 @@ const ServiceManager = props => {
               />
             ) : null}
           </ScrollView>
-
           <CustomButton
             icon={icons.ic_plus}
             styleButton={styles.styleButton}
@@ -119,8 +117,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundGrey,
   },
   textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  content: {color: 'grey', fontSize: 14, fontWeight: '500'},
+  content: {color: 'grey', fontSize: 14},
   viewButton: {alignSelf: 'center', alignItems: 'center', marginVertical: 10},
+  styleButton: {
+    backgroundColor: colors.mainColor,
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    marginBottom: 5,
+  },
   styleButton: {
     backgroundColor: colors.mainColor,
     height: 50,
@@ -130,4 +135,4 @@ const styles = StyleSheet.create({
   },
   styleLabel: {color: 'white', fontWeight: '500', marginLeft: 5},
 });
-export default ServiceManager;
+export default UtilitiesManager;

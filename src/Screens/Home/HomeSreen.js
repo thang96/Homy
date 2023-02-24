@@ -99,7 +99,7 @@ const HomeScreen = () => {
               icon={icons.ic_contract}
               styleImageBG={{tintColor: '#1297c0'}}
               styleBGIcon={{backgroundColor: '#ebf9fd'}}
-              onPress={() => navigation.navigate('CreateContract')}
+              onPress={() => navigation.navigate('ContractManagement')}
             />
             <CustomOptionBT
               title={'Công việc'}
@@ -114,6 +114,7 @@ const HomeScreen = () => {
               icon={icons.ic_bill}
               styleImageBG={{tintColor: '#7ace68'}}
               styleBGIcon={{backgroundColor: '#e6f6e2'}}
+              onPress={() => navigation.navigate('BillManagement')}
             />
           </View>
           <View style={[styles.viewRow, {marginTop: 15}]}>
@@ -129,6 +130,7 @@ const HomeScreen = () => {
               icon={icons.ic_bed}
               styleImageBG={{tintColor: '#21bab5'}}
               styleBGIcon={{backgroundColor: '#edfcfb'}}
+              onPress={() => navigation.navigate('UtilitiesManager')}
             />
             <CustomOptionBT
               title={'Thanh toán'}
