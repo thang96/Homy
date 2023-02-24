@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: colors.mainColor,
-    height: 50,
-    borderRadius: 10,
+    height: 60,
+    borderRadius: 5,
     padding: 10,
   },
   viewRow: {

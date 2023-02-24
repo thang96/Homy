@@ -12,6 +12,12 @@ import {
   AddUtilities,
   BuildingInformation,
   FloorInformation,
+  RoomInformation,
+  AddRoom,
+  CreateContract,
+  TenantList,
+  AddNewTenant,
+  ServiceManager,
 } from '../../../Screens';
 const Stack = createStackNavigator();
 const StackHomepage = () => {
@@ -60,6 +66,13 @@ const StackHomepage = () => {
         }}
       />
       <Stack.Screen
+        component={ServiceManager}
+        name={'ServiceManager'}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         component={AddService}
         name={'AddService'}
         options={{
@@ -90,6 +103,41 @@ const StackHomepage = () => {
       <Stack.Screen
         component={FloorInformation}
         name={'FloorInformation'}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={RoomInformation}
+        name={'RoomInformation'}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddRoom}
+        name={'AddRoom'}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={CreateContract}
+        name={'CreateContract'}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={TenantList}
+        name={'TenantList'}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddNewTenant}
+        name={'AddNewTenant'}
         options={{
           headerShown: false,
         }}

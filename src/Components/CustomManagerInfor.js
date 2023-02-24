@@ -12,8 +12,8 @@ const CustomManagerInfor = props => {
         source={avatar ? {uri: avatar} : icons.ic_user}
       />
       <View style={{marginLeft: 10}}>
-        <Text>{userName}</Text>
-        <Text>{phoneNumber}</Text>
+        <Text style={styles.userName}>{userName}</Text>
+        <Text style={styles.phoneNumber}>{phoneNumber}</Text>
       </View>
       <CustomButton
         icon={icons.ic_moreOption}
@@ -48,5 +48,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
+  userName: {color: 'black'},
+  phoneNumber: {color: 'blue'},
 });
 export default CustomManagerInfor;

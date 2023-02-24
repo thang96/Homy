@@ -36,4 +36,5 @@ export default {
   ic_location: require('../Assets/Icons/ic_location.png'),
   ic_edit: require('../Assets/Icons/ic_edit.png'),
   ic_men: require('../Assets/Icons/ic_men.png'),
+  ic_dollar: require('../Assets/Icons/ic_dollar.png'),
 };

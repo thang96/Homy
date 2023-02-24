@@ -5,6 +5,7 @@ import CustomInputText from './CustomTextInput';
 
 const CustomInput = props => {
   const {
+    important,
     type,
     styleViewInput,
     title,
@@ -19,7 +20,7 @@ const CustomInput = props => {
     <View style={styleViewInput}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Text style={styles.label}>{title}</Text>
-        <Text style={{color: 'red', fontSize: 14}}> *</Text>
+        {important && <Text style={{color: 'red', fontSize: 14}}> *</Text>}
       </View>
       {type == 'input' && (
         <CustomInputText
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     alignItems: 'center',
-    borderColor: colors.mainColor,
+    borderColor: 'grey',
     paddingHorizontal: 5,
   },
   viewInput: {

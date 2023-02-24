@@ -20,7 +20,7 @@ import {colors, icons, images} from '../../Constants';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [keyboard, setKeyboard] = useState(null);
+  const [keyboard, setKeyboard] = useState(false);
   const [textSearch, setTextSearch] = useState('');
   const widthImage = Dimensions.get('window').width / 2 - 20;
   useEffect(() => {
@@ -99,6 +99,7 @@ const HomeScreen = () => {
               icon={icons.ic_contract}
               styleImageBG={{tintColor: '#1297c0'}}
               styleBGIcon={{backgroundColor: '#ebf9fd'}}
+              onPress={() => navigation.navigate('CreateContract')}
             />
             <CustomOptionBT
               title={'Công việc'}
@@ -121,6 +122,7 @@ const HomeScreen = () => {
               icon={icons.ic_contract}
               styleImageBG={{tintColor: '#21bab5'}}
               styleBGIcon={{backgroundColor: '#edfcfb'}}
+              onPress={() => navigation.navigate('ServiceManager')}
             />
             <CustomOptionBT
               title={'Tiện ích'}
@@ -129,8 +131,8 @@ const HomeScreen = () => {
               styleBGIcon={{backgroundColor: '#edfcfb'}}
             />
             <CustomOptionBT
-              title={'Content'}
-              icon={icons.ic_file}
+              title={'Thanh toán'}
+              icon={icons.ic_dollar}
               styleImageBG={{tintColor: '#21bab5'}}
               styleBGIcon={{backgroundColor: '#edfcfb'}}
             />
@@ -370,9 +372,19 @@ const styleBT = StyleSheet.create({
   label: {color: 'black', fontWeight: 'bold', fontSize: 14, marginTop: 5},
 });
 const CustomOptionBT = props => {
-  const {icon, styleImageBG, styleButton, styleBGIcon, title, content} = props;
+  const {
+    icon,
+    styleImageBG,
+    styleButton,
+    styleBGIcon,
+    title,
+    content,
+    onPress,
+  } = props;
   return (
-    <TouchableOpacity style={[styleOption.button, styleButton]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styleOption.button, styleButton]}>
       <View style={[styleOption.backgroundIcon, styleBGIcon]}>
         <Image
           style={[styleOption.icon, styleImageBG]}

@@ -81,7 +81,7 @@ const AddBuildingsStep2 = props => {
           onPress={() => setModalFromDate(false)}
         />
       )}
-      {modalToDay && (
+      {modalToDate && (
         <CustomModalDateTimePicker
           onCancel={() => setModalToDay(false)}
           value={toDay}
