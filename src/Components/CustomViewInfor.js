@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: colors.mainColor,
-    height: 60,
+    minHeight: 60,
     borderRadius: 5,
     padding: 10,
   },

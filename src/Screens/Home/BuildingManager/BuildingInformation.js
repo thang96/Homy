@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: colors.backgroundGrey},
   appBar: {
     backgroundColor: colors.mainColor,
-    height: 70,
+    minHeight: 70,
     paddingHorizontal: 10,
     justifyContent: 'center',
   },
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
   },
   labelEdit: {color: 'white', marginLeft: 3, fontSize: 14},
   viewUtils: {
-    height: 110,
+    minHeight: 110,
     backgroundColor: 'white',
     elevation: 1,
     zIndex: 1,

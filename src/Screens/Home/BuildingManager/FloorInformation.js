@@ -159,9 +159,10 @@ const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: colors.backgroundGrey},
   appBar: {
     backgroundColor: colors.mainColor,
-    height: 120,
+    minHeight: 120,
     paddingHorizontal: 10,
     justifyContent: 'center',
+    paddingBottom: 5,
   },
   whiteLine: {
     height: 1,

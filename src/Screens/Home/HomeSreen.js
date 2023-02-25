@@ -34,23 +34,22 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <CustomAppBar
+      <CustomSearchAppBar
         iconLeft={icons.ic_menu}
         label={'Trang chủ'}
         iconRight={icons.ic_bell}
         iconSecondRight={icons.ic_moreOption}
-      />
-      <CustomSearchAppBar
         keyboard={keyboard}
         textSearch={textSearch}
         value={textSearch}
         onChangeText={text => setTextSearch(text)}
         placeholder={'Tìm kiếm...'}
       />
+
       <ScrollView style={styles.eachContainer}>
         <View style={styles.viewRow}>
           <CustomViewButton
-            styleButton={{width: widthImage}}
+            styleButton={{width: 175, height: 91}}
             styleImageBG={{width: widthImage}}
             imageBG={images.im_frame1}
             icon={icons.ic_building}
