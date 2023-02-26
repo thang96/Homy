@@ -32,19 +32,17 @@ const BuildingManager = () => {
 
   return (
     <View style={styles.container}>
-      <CustomAppBar
+      <CustomSearchAppBar
         iconLeft={icons.ic_back}
         label={'Quản lý tòa nhà'}
         iconRight={icons.ic_bell}
-        iconSecondRight={icons.ic_moreOption}
-        pressIconLeft={() => navigation.goBack()}
-      />
-      <CustomSearchAppBar
+        iconSecondRight={icons.ic_circleFill}
         keyboard={keyboard}
         textSearch={textSearch}
         value={textSearch}
         onChangeText={text => setTextSearch(text)}
         placeholder={'Tìm kiếm...'}
+        pressIconLeft={() => navigation.goBack()}
       />
 
       <Text style={styles.title}>Tòa nhà hiện có</Text>

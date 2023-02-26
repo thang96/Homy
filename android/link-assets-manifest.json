@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/Assets/Fonts/HeadlandOne-Regular.ttf",
+      "sha1": "2205f9a541ac4d52fd511a8b6cb5016fccfd014b"
+    },
+    {
       "path": "src/Assets/Fonts/OpenSans-Bold.ttf",
       "sha1": "c1691e8168b2596af8a00162bac60dbe605e9e36"
     },

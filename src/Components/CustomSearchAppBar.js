@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import CustomTextInput from './CustomTextInput';
 import CustomButton from './CustomButton';
-import {icons, colors} from '../Constants';
+import {icons, colors, fonts} from '../Constants';
 
 const CustomSearchAppBar = props => {
   const {
@@ -31,7 +31,7 @@ const CustomSearchAppBar = props => {
       <View style={styles.styleAppBar}>
         {iconLeft && (
           <CustomButton
-            styleButton={styles.styleButton}
+            styleButton={styles.styleButtonTop}
             icon={iconLeft}
             styleIcon={styles.icon}
             onPress={pressIconLeft}
@@ -40,7 +40,7 @@ const CustomSearchAppBar = props => {
         {label && <Text style={styles.label}>{label}</Text>}
         {iconRight && (
           <CustomButton
-            styleButton={styles.styleButton}
+            styleButton={styles.styleButtonTop}
             icon={iconRight}
             styleIcon={styles.icon}
             onPress={pressIconRight}
@@ -48,28 +48,28 @@ const CustomSearchAppBar = props => {
         )}
         {iconSecondRight && (
           <CustomButton
-            styleButton={styles.styleButton}
+            styleButton={styles.styleButtonTop}
             icon={iconSecondRight}
             styleIcon={styles.icon}
             onPress={pressSeccodIconRight}
           />
         )}
       </View>
-      <View style={stylesAppBar.viewContainer}>
-        <View style={stylesAppBar.viewSearch}>
+      <View style={styles.viewContainer}>
+        <View style={styles.viewSearch}>
           <CustomTextInput
-            styleViewTextInput={stylesAppBar.viewInput}
+            styleViewTextInput={styles.viewInput}
             placeholder={placeholder}
             iconLeft={
               textSearch == '' && keyboard == false ? icons.ic_search : null
             }
-            styleIconLeft={stylesAppBar.styleIconLeft}
+            styleIconLeft={styles.styleIconLeft}
             value={value}
             onChangeText={onChangeText}
           />
           <CustomButton
-            styleButton={stylesAppBar.styleButton}
-            styleIcon={stylesAppBar.styleIcon}
+            styleButton={styles.styleButton}
+            styleIcon={styles.styleIcon}
             icon={icons.ic_option}
             onPress={onPress}
           />
@@ -91,11 +91,9 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     flex: 1,
     fontSize: 17,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Semibold',
   },
-  styleButton: {width: 25, height: 56, marginHorizontal: 10},
-});
-const stylesAppBar = StyleSheet.create({
+  styleButtonTop: {width: 25, height: 56, marginHorizontal: 10},
   viewContainer: {
     height: 76,
     borderBottomLeftRadius: 10,
