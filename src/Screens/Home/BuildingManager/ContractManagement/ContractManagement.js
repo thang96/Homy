@@ -12,16 +12,14 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import CustomAppBar from '../../../../Components/CustomAppBar';
-import CustomTwoButtonBottom from '../../../../Components/CustomTwoButtonBottom';
 import {icons, colors} from '../../../../Constants';
 // import {ScrollView} from 'react-native-virtualized-view';
 import CustomButton from '../../../../Components/CustomButton';
-import CustomChecker from '../../../../Components/CustomChecker';
 import CustomSearchAppBar from '../../../../Components/CustomSearchAppBar';
 import CustomIsActive from './CustomIsActive';
 import CustomOutOfDate from './CustomOutOfDate';
 import CustomLiquidated from './CustomLiquidated';
+import CustomButtonBottom from '../../../../Components/CustomButtonBottom';
 
 const ContractManagement = props => {
   const navigation = useNavigation();
@@ -41,14 +39,12 @@ const ContractManagement = props => {
   return (
     <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
       <KeyboardAvoidingView style={{flex: 1}}>
-        <CustomAppBar
+        <CustomSearchAppBar
           iconLeft={icons.ic_back}
           label={'Quản lý hợp đồng'}
           iconRight={icons.ic_bell}
           iconSecondRight={icons.ic_moreOption}
           pressIconLeft={() => navigation.goBack()}
-        />
-        <CustomSearchAppBar
           keyboard={keyboard}
           textSearch={textSearch}
           value={textSearch}
@@ -57,7 +53,7 @@ const ContractManagement = props => {
         />
         <View style={{flex: 1, paddingHorizontal: 10}}>
           <ScrollView style={[styles.eachContainer]}>
-            <ScrollView horizontal style={{height: 45}}>
+            <ScrollView horizontal style={{height: 68}}>
               <CustomButton
                 label={'Hoạt động'}
                 styleLabel={[
@@ -67,9 +63,10 @@ const ContractManagement = props => {
                 styleButton={[
                   styles.topButton,
                   {
-                    borderBottomWidth: isActive == 1 ? 3 : 0,
                     borderBottomColor:
-                      isActive == 1 ? colors.backgroundButton : 'grey',
+                      isActive == 1
+                        ? colors.backgroundButton
+                        : colors.backgroundGrey,
                   },
                 ]}
                 onPress={() => setIsActive(1)}
@@ -83,9 +80,10 @@ const ContractManagement = props => {
                 styleButton={[
                   styles.topButton,
                   {
-                    borderBottomWidth: isActive == 2 ? 3 : 0,
                     borderBottomColor:
-                      isActive == 2 ? colors.backgroundButton : 'grey',
+                      isActive == 2
+                        ? colors.backgroundButton
+                        : colors.backgroundGrey,
                   },
                 ]}
                 onPress={() => setIsActive(2)}
@@ -99,9 +97,10 @@ const ContractManagement = props => {
                 styleButton={[
                   styles.topButton,
                   {
-                    borderBottomWidth: isActive == 3 ? 3 : 0,
                     borderBottomColor:
-                      isActive == 3 ? colors.backgroundButton : 'grey',
+                      isActive == 3
+                        ? colors.backgroundButton
+                        : colors.backgroundGrey,
                   },
                 ]}
                 onPress={() => setIsActive(3)}
@@ -115,13 +114,9 @@ const ContractManagement = props => {
               <CustomLiquidated />
             ) : null}
           </ScrollView>
-          <CustomButton
-            icon={icons.ic_plus}
-            styleButton={styles.styleButton}
-            label={'Thêm dịch vụ mới'}
-            styleLabel={styles.styleLabel}
-            styleIcon={{width: 20, height: 20, tintColor: 'white'}}
-            onPress={() => navigation.navigate('AddService')}
+          <CustomButtonBottom
+            label={'Thêm hợp đồng'}
+            onPress={() => navigation.navigate('CreateContract')}
           />
         </View>
       </KeyboardAvoidingView>
@@ -134,23 +129,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: colors.backgroundGrey,
   },
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  styleButton: {
-    backgroundColor: colors.mainColor,
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    marginBottom: 5,
-  },
-  styleButton: {
-    backgroundColor: colors.mainColor,
-    height: 50,
-    borderRadius: 10,
-    marginBottom: 5,
-    flexDirection: 'row',
-  },
   styleLabel: {color: 'white', fontWeight: '500', marginLeft: 5},
-  topButton: {marginRight: 15},
+  topButton: {marginRight: 15, height: 44, borderBottomWidth: 3},
   labelTop: {fontWeight: 'bold', fontSize: 16},
 });
 export default ContractManagement;

@@ -11,11 +11,9 @@ import {
   FlatList,
   Keyboard,
 } from 'react-native';
-import CustomAppBar from '../../../Components/CustomAppBar';
-import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
+import CustomButtonBottom from '../../../Components/CustomButtonBottom';
 import {icons, colors} from '../../../Constants';
 import {ScrollView} from 'react-native-virtualized-view';
-import CustomButton from '../../../Components/CustomButton';
 import CustomChecker from '../../../Components/CustomChecker';
 import CustomSearchAppBar from '../../../Components/CustomSearchAppBar';
 
@@ -67,14 +65,12 @@ const UtilitiesManager = props => {
   return (
     <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
       <KeyboardAvoidingView style={{flex: 1}}>
-        <CustomAppBar
+        <CustomSearchAppBar
           iconLeft={icons.ic_back}
           label={'Quản lý tiện ích'}
           iconRight={icons.ic_bell}
           iconSecondRight={icons.ic_moreOption}
           pressIconLeft={() => navigation.goBack()}
-        />
-        <CustomSearchAppBar
           keyboard={keyboard}
           textSearch={textSearch}
           value={textSearch}
@@ -96,13 +92,10 @@ const UtilitiesManager = props => {
               />
             ) : null}
           </ScrollView>
-          <CustomButton
-            icon={icons.ic_plus}
-            styleButton={styles.styleButton}
-            label={'Thêm dịch vụ mới'}
-            styleLabel={styles.styleLabel}
-            styleIcon={{width: 20, height: 20, tintColor: 'white'}}
-            onPress={() => navigation.navigate('AddService')}
+
+          <CustomButtonBottom
+            label={'Thêm tiện ích mới'}
+            onPress={() => navigation.navigate('AddUtilities')}
           />
         </View>
       </KeyboardAvoidingView>

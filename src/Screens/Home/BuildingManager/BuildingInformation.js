@@ -11,17 +11,16 @@ import {
   Dimensions,
   ImageBackground,
 } from 'react-native';
-import CustomAppBar from '../../../Components/CustomAppBar';
 import CustomButton from '../../../Components/CustomButton';
 import {ScrollView} from 'react-native-virtualized-view';
 import {colors, icons, images} from '../../../Constants';
 import CustomViewInfor from '../../../Components/CustomViewInfor';
 import CustomManagerInfor from '../../../Components/CustomManagerInfor';
 import {FlatList} from 'react-native-gesture-handler';
-import CustomChecker from '../../../Components/CustomChecker';
 import CustomPaidService from '../../../Components/CustomPaidService';
 import CustomFreeService from '../../../Components/CustomFreeService';
-import CustomAppBarBildingInfor from '../../../Components/CustomAppBarBildingInfor';
+import CustomAppBarBuildingInfor from '../../../Components/CustomAppBarBuildingInfor';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 
 const BuildingInformation = () => {
   const navigation = useNavigation();
@@ -84,11 +83,11 @@ const BuildingInformation = () => {
 
   return (
     <View style={styles.container}>
-      <CustomAppBarBildingInfor />
+      <CustomAppBarBuildingInfor onPressLeft={() => navigation.goBack()} />
       <ScrollView style={{paddingHorizontal: 10, paddingTop: 20}}>
         <View style={styles.viewUtils}>
           <CustomOptionBT
-            title={'Số phòng'}
+            title={'Phòng'}
             content={'12'}
             icon={icons.ic_bed}
             styleImageBG={{tintColor: '#1297c0'}}
@@ -96,7 +95,7 @@ const BuildingInformation = () => {
             onPress={() => navigation.navigate('FloorInformation')}
           />
           <CustomOptionBT
-            title={'Phòng trống'}
+            title={'Trống'}
             content={'8'}
             icon={icons.ic_key}
             styleImageBG={{tintColor: '#ff8d37'}}
@@ -112,7 +111,7 @@ const BuildingInformation = () => {
           <CustomOptionBT
             title={'Sự cố'}
             content={'2'}
-            icon={icons.ic_exclamation}
+            icon={icons.ic_hammer}
             styleImageBG={{tintColor: '#f5dc00'}}
             styleBGIcon={{backgroundColor: '#fefdd9'}}
           />
@@ -120,9 +119,7 @@ const BuildingInformation = () => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle, {marginVertical: 5}]}>
-          Thông tin tòa nhà
-        </Text>
+        <CustomTextTitle label={'Thông tin tòa nhà'} />
         <View style={[styles.viewRow, {marginBottom: 10}]}>
           <CustomViewInfor
             title={'Giờ mở cửa'}
@@ -143,9 +140,8 @@ const BuildingInformation = () => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle, {marginVertical: 5}]}>
-          Quản lý tòa nhà
-        </Text>
+        <CustomTextTitle label={'Quản lý tòa nhà'} />
+
         <CustomManagerInfor
           styleView={{marginTop: 10}}
           avatar={avatar}
@@ -169,9 +165,8 @@ const BuildingInformation = () => {
         />
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle, {marginVertical: 5}]}>
-          Thông tin thanh toán
-        </Text>
+        <CustomTextTitle label={'Thông tin thanh toán'} />
+
         <View style={[styles.viewRow, {marginBottom: 10}]}>
           <CustomViewInfor title={'Thời gian đóng tiền'} label={'Ngày 2'} />
           <CustomViewInfor title={'Hạn'} label={'Ngày 8'} />
@@ -180,9 +175,7 @@ const BuildingInformation = () => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle, {marginVertical: 5}]}>
-          Dịch vụ có phí
-        </Text>
+        <CustomTextTitle label={'Dịch vụ có phí'} />
         {listPaidSevice.length > 0 ? (
           <FlatList
             listKey="listPaidSevice"
@@ -201,15 +194,13 @@ const BuildingInformation = () => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle, {marginVertical: 5}]}>
-          Tiện ích miễn phí
-        </Text>
+        <CustomTextTitle label={'Tiện ích miễn phí'} />
         {listFreeSevice.length > 0 ? (
           <FlatList
             listKey="listFreeSevice"
             horizontal={false}
             scrollEnabled={false}
-            numColumns={2}
+            numColumns={3}
             keyExtractor={key => key.value}
             data={listFreeSevice}
             renderItem={({item, index}) => renderFreeSevice(item, index)}
@@ -222,82 +213,82 @@ const BuildingInformation = () => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle, {marginVertical: 5}]}>Lưu ý</Text>
-        <Text style={{color: 'black'}}>
+        <CustomTextTitle label={'Lưu ý'} />
+        <Text style={{color: '#7F8A93', fontSize: 15, fontWeight: '400'}}>
           {
             'Ăn ở bẩn thịu hoặc làm ảnh hưởng người xung quanh sẽ bị đơn phương chấm dứt hợp đồng'
           }
         </Text>
 
-        <View style={styles.line} />
-
-        <CustomButton
-          label={'Chỉnh sửa'}
-          styleLabel={styles.pickerTotal}
-          styleButton={styles.styleButton}
-        />
-
         <View style={{marginBottom: 56}} />
       </ScrollView>
+      <View style={styles.viewEdit}>
+        <CustomButton
+          label={'Chỉnh sửa'}
+          styleLabel={styles.textEdit}
+          styleButton={styles.styleButton}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: colors.backgroundGrey},
-  appBar: {
-    minHeight: 172,
-    paddingHorizontal: 10,
-    justifyContent: 'center',
-  },
-  whiteLine: {
-    height: 1,
-    width: '100%',
-    alignSelf: 'center',
-    backgroundColor: 'white',
-  },
   line: {
     height: 1,
     width: '100%',
     alignSelf: 'center',
     backgroundColor: 'black',
-    marginVertical: 20,
+    marginTop: 20,
+    marginBottom: 10,
   },
   viewRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  textBuilding: {fontSize: 25, fontWeight: 'bold', color: 'white'},
-  iconEdit: {tintColor: 'white', width: 15, height: 15},
-  buttonEdit: {
-    height: 28,
-    flexDirection: 'row',
-    backgroundColor: 'orange',
-    paddingHorizontal: 5,
-    borderRadius: 5,
-  },
-  labelEdit: {color: 'white', marginLeft: 3, fontSize: 14},
   viewUtils: {
-    minHeight: 110,
+    height: 128,
     backgroundColor: 'white',
-    elevation: 1,
-    zIndex: 1,
     padding: 2,
     borderRadius: 10,
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 10,
+    margin: 1,
+    elevation: 3,
   },
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  textPicker: {fontSize: 14, color: 'orange'},
+  textPicker: {fontSize: 15, fontWeight: '400', color: 'rgba(254, 122, 55, 1)'},
+  pickerTotal: {
+    fontSize: 15,
+    color: 'rgba(254, 122, 55, 1)',
+    fontWeight: '600',
+  },
   pickerTotal: {fontSize: 15, color: 'orange', fontWeight: 'bold'},
   styleButton: {
+    height: 44,
     borderWidth: 2,
-    height: 50,
-    borderRadius: 10,
-    borderColor: 'orange',
-    marginTop: 30,
+    width: 358,
+    borderRadius: 5,
+    borderColor: '#fe7a37',
+  },
+  textEdit: {color: '#fe7e3d', fontSize: 15, fontWeight: '400'},
+  viewEdit: {
+    height: 70,
+    borderTopColor: 'grey',
+    borderTopWidth: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    backgroundColor: 'white',
   },
 });
 
@@ -329,50 +320,18 @@ const CustomOptionBT = props => {
 };
 const styleOption = StyleSheet.create({
   button: {
-    width: 90,
     alignItems: 'center',
     paddingHorizontal: 10,
   },
-  icon: {height: 35, width: 35},
-  title: {fontSize: 11, color: 'grey', textAlign: 'center'},
-  content: {fontSize: 14, fontWeight: 'bold', color: 'black'},
+  icon: {height: 20, width: 20},
+  title: {fontSize: 11, color: 'rgba(127, 138, 147, 1)', textAlign: 'center'},
+  content: {fontSize: 15, fontWeight: 'bold', color: 'rgba(55, 64, 71, 1)'},
   backgroundIcon: {
-    width: 50,
-    height: 50,
+    width: 48,
+    height: 48,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
   },
 });
 export default BuildingInformation;
-
-const CustomSecondAppBarRoom = props => {
-  const {} = props;
-  return (
-    <ImageBackground source={images.im_appBar}>
-      <View style={{height: 56}} />
-      <View style={styles.appBar}>
-        <View style={styles.whiteLine} />
-        <View style={styles.viewRow}>
-          <Text style={styles.textBuilding}>Tòa nhà D1</Text>
-          <CustomButton
-            styleButton={styles.buttonEdit}
-            icon={icons.ic_edit}
-            styleIcon={styles.iconEdit}
-            label={'Chỉnh sửa'}
-            styleLabel={styles.labelEdit}
-          />
-        </View>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image
-            source={icons.ic_location}
-            style={{width: 20, height: 20, tintColor: 'white'}}
-          />
-          <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>
-            448 Lê Văn Việt, Tăng Nhơn Phú A, TP. Thủ Đức
-          </Text>
-        </View>
-      </View>
-    </ImageBackground>
-  );
-};

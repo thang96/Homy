@@ -11,19 +11,13 @@ import {
   KeyboardAvoidingView,
   FlatList,
 } from 'react-native';
-import CustomAppBar from '../../../Components/CustomAppBar';
-import CustomButton from '../../../Components/CustomButton';
-import CustomManagerInfor from '../../../Components/CustomManagerInfor';
-import CustomModalDateTimePicker from '../../../Components/CustomModalDateTimePicker';
-import CustomStepAppBar from '../../../Components/CustomStepAppBar';
-import CustomInputText from '../../../Components/CustomTextInput';
 import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
+import CustomModalDateTimePicker from '../../../Components/CustomModalDateTimePicker';
 import {icons, colors} from '../../../Constants';
-import ImagePicker from 'react-native-image-crop-picker';
-import CustomModalCamera from '../../../Components/CustomModalCamera';
-import {uuid} from '../../../utils/uuid';
 import CustomInput from '../../../Components/CustomInput';
 import CustomTimeButtons from '../../../Components/CustomTimeButton';
+import CustomAppBarStep from '../../../Components/CustomAppBarStep';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 
 const AddBuildingsStep2 = props => {
   const navigation = useNavigation();
@@ -96,23 +90,23 @@ const AddBuildingsStep2 = props => {
         />
       )}
       <KeyboardAvoidingView style={{flex: 1}}>
-        <CustomAppBar
+        <CustomAppBarStep
           iconLeft={icons.ic_back}
           label={'Thiết lập tiền nhà'}
           iconRight={icons.ic_bell}
           iconSecondRight={icons.ic_moreOption}
           pressIconLeft={() => navigation.goBack()}
+          step={2}
         />
-        <CustomStepAppBar step={2} />
         <ScrollView style={[styles.eachContainer]}>
           <Text style={styles.content}>
             Vui lòng điền đầy đủ thông tin! Mục có dấu * là bắt buộc
           </Text>
-          <Text style={styles.textTitle}>Thiết lập tiền nhà</Text>
+          <CustomTextTitle label={'Thiết lập tiền nhà'} />
 
           <CustomInput
+            important={true}
             type={'button'}
-            styleViewInput={{marginTop: 10}}
             title={'Ngày chốt tiền'}
             placeholder={'Chọn ngày'}
             value={toDayValue}
@@ -149,8 +143,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: colors.backgroundGrey,
   },
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  content: {color: 'grey', fontSize: 14},
+  content: {color: 'rgba(127, 138, 147, 1)', fontSize: 13},
   viewButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -11,12 +11,9 @@ import {
   KeyboardAvoidingView,
   FlatList,
 } from 'react-native';
-import CustomAppBar from '../../../Components/CustomAppBar';
 import CustomButton from '../../../Components/CustomButton';
 import CustomManagerInfor from '../../../Components/CustomManagerInfor';
 import CustomModalDateTimePicker from '../../../Components/CustomModalDateTimePicker';
-import CustomStepAppBar from '../../../Components/CustomStepAppBar';
-import CustomInputText from '../../../Components/CustomTextInput';
 import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
 import {icons, colors} from '../../../Constants';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -24,6 +21,8 @@ import CustomModalCamera from '../../../Components/CustomModalCamera';
 import {uuid} from '../../../utils/uuid';
 import CustomInput from '../../../Components/CustomInput';
 import CustomTimeButtons from '../../../Components/CustomTimeButton';
+import CustomAppBarStep from '../../../Components/CustomAppBarStep';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 
 const AddBuildings = props => {
   const navigation = useNavigation();
@@ -114,7 +113,7 @@ const AddBuildings = props => {
     setAlbumImage(newResult);
   };
   return (
-    <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <KeyboardAvoidingView style={{flex: 1}}>
         {modalCamera && (
           <CustomModalCamera
@@ -153,25 +152,25 @@ const AddBuildings = props => {
             onPress={() => setModalToTime(false)}
           />
         )}
-        <CustomAppBar
+
+        <CustomAppBarStep
           iconLeft={icons.ic_back}
           label={'Thiết lập thông tin'}
           iconRight={icons.ic_bell}
           iconSecondRight={icons.ic_moreOption}
           pressIconLeft={() => navigation.goBack()}
+          step={1}
         />
-        <CustomStepAppBar step={1} />
 
         <ScrollView style={[styles.eachContainer]}>
           <Text style={styles.content}>
             Vui lòng điền đầy đủ thông tin! Mục có dấu * là bắt buộc
           </Text>
 
-          <Text style={[styles.textTitle, {marginVertical: 5}]}>
-            Thông tin tòa nhà
-          </Text>
+          <CustomTextTitle label={'Thông tin tòa nhà'} />
 
           <CustomInput
+            important={true}
             type={'input'}
             title={'Tên tòa nhà'}
             placeholder={'Nhập tên tòa nhà'}
@@ -180,6 +179,7 @@ const AddBuildings = props => {
           />
 
           <CustomInput
+            important={true}
             keyboardType={'numeric'}
             type={'input'}
             styleViewInput={{marginTop: 10}}
@@ -209,7 +209,9 @@ const AddBuildings = props => {
               placeholder="Nhập chi phí thuê nhà (Nếu có)"
               style={{flex: 1}}
             />
-            <Text style={styles.time}>VNĐ</Text>
+            <View style={styles.viewTime}>
+              <Text style={styles.time}>VNĐ</Text>
+            </View>
           </View>
 
           <Text style={[styles.label, {marginTop: 10}]}>Mô tả</Text>
@@ -219,9 +221,7 @@ const AddBuildings = props => {
 
           <View style={styles.line} />
 
-          <Text style={[styles.textTitle, {marginVertical: 5}]}>
-            Địa chỉ tòa nhà
-          </Text>
+          <CustomTextTitle label={'Địa chỉ tòa nhà'} />
 
           <CustomInput
             type={'button'}
@@ -257,18 +257,7 @@ const AddBuildings = props => {
 
           <View style={styles.line} />
 
-          <View style={styles.viewRow}>
-            <Text style={[styles.textTitle, {marginVertical: 5}]}>
-              Quản lý tòa nhà
-            </Text>
-            <CustomButton
-              icon={icons.ic_plus}
-              styleIcon={[styles.icon, {tintColor: 'white', marginRight: 5}]}
-              label={'Thêm mới'}
-              styleLabel={{fontWeight: '500', fontSize: 14, color: 'white'}}
-              styleButton={[styles.viewRow, styles.styleButton]}
-            />
-          </View>
+          <CustomTextTitle label={'Quản lý tòa nhà'} labelButton={'Thêm mới'} />
 
           <CustomManagerInfor
             styleView={{marginTop: 10}}
@@ -352,13 +341,17 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: colors.backgroundGrey,
   },
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  content: {color: 'grey', fontSize: 14},
-  label: {fontSize: 15, color: 'black', fontWeight: '500'},
-  time: {
+  content: {color: 'grey', fontSize: 13},
+  label: {fontSize: 15, color: '#5f666b'},
+  viewTime: {
+    height: 32,
+    paddingHorizontal: 3,
     backgroundColor: '#ebedee',
+    borderRadius: 4,
+  },
+  time: {
     borderRadius: 5,
-    color: 'black',
+    color: '#50595f',
     fontSize: 14,
   },
   title: {fontSize: 13, color: 'grey'},
@@ -370,6 +363,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderRadius: 10,
     borderColor: 'grey',
+    backgroundColor: '#f8f9f9',
   },
   viewRow: {
     flexDirection: 'row',
@@ -381,8 +375,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 5,
     borderRadius: 10,
-    borderColor: colors.mainColor,
-    height: 100,
+    borderColor: '#e2e5e6',
+    height: 120,
+    backgroundColor: '#f8f9f9',
   },
   line: {
     width: '100%',
@@ -392,12 +387,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   icon: {width: 20, height: 20},
-  styleButton: {
-    backgroundColor: colors.backgroundButton,
-    borderRadius: 10,
-    height: 50,
-    paddingHorizontal: 10,
-  },
+
   buttonUploadIM: {
     height: 50,
     backgroundColor: colors.mainColor,

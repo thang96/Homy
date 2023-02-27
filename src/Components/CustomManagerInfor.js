@@ -8,10 +8,15 @@ const CustomManagerInfor = props => {
   return (
     <View style={[styles.container, styleView]}>
       <Image
+        resizeMode="contain"
         style={styles.avatar}
         source={avatar ? {uri: avatar} : icons.ic_user}
       />
-      <View style={{marginLeft: 10}}>
+      <View
+        style={{
+          marginLeft: 10,
+          justifyContent: 'center',
+        }}>
         <Text style={styles.userName}>{userName}</Text>
         <Text style={styles.phoneNumber}>{phoneNumber}</Text>
       </View>
@@ -26,18 +31,29 @@ const CustomManagerInfor = props => {
 };
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+    height: 62,
     elevation: 1,
     zIndex: 1,
     backgroundColor: 'white',
     padding: 2,
-    borderRadius: 10,
+    borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
+    margin: 1,
+    paddingHorizontal: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
   avatar: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     borderRadius: 10,
     backgroundColor: '#ebedee',
   },
@@ -48,7 +64,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
-  userName: {color: 'black'},
-  phoneNumber: {color: 'blue'},
+  userName: {fontSize: 15, fontWeight: 'bold', color: 'rgba(55, 64, 71, 1)'},
+  phoneNumber: {fontSize: 13, color: 'rgba(85, 204, 239, 1)'},
 });
 export default CustomManagerInfor;

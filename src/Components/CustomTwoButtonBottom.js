@@ -30,15 +30,16 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
     borderTopColor: 'grey',
     justifyContent: 'space-between',
+    paddingHorizontal: 10,
   },
   styleButton: {
     borderWidth: 3,
-    height: 50,
+    height: 44,
     flex: 1,
     borderRadius: 10,
   },
   styleLeftButton: {
-    borderColor: 'red',
+    borderColor: '#fe7a37',
     backgroundColor: 'white',
     marginRight: 5,
   },
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.mainColor,
     marginLeft: 5,
   },
-  styleLeftLabel: {color: 'red', fontWeight: '500'},
-  styleRightLabel: {color: 'white', fontWeight: '500'},
+  styleLeftLabel: {color: '#fe7a37', fontSize: 15},
+  styleRightLabel: {color: 'white', fontSize: 15},
 });
 export default CustomTwoButtonBottom;

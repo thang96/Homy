@@ -29,6 +29,9 @@ import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
 import ImagePicker from 'react-native-image-crop-picker';
 import CustomSearchAppBar from '../../../Components/CustomSearchAppBar';
 import CustomModalCamera from '../../../Components/CustomModalCamera';
+import CustomSuggest from '../../../Components/CustomSuggest';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
+import CustomInputValue from '../../../Components/CustomInputValue';
 
 const AddNewTenant = () => {
   const navigation = useNavigation();
@@ -118,15 +121,13 @@ const AddNewTenant = () => {
         label={'Thêm người thuê'}
         iconRight={icons.ic_bell}
         iconSecondRight={icons.ic_moreOption}
+        pressIconLeft={() => navigation.goBack()}
       />
       <ScrollView style={{paddingHorizontal: 10, paddingTop: 10}}>
-        <Text style={{color: 'grey'}}>
-          Vui lòng điền đầy đủ thông tin! Mục có dấu * là bắt buộc
-        </Text>
-
-        <Text style={[styles.textTitle, {marginVertical: 10}]}>
-          Thông tin người thuê
-        </Text>
+        <CustomSuggest
+          label={'Vui lòng điền đầy đủ thông tin! Mục có dấu * là bắt buộc'}
+        />
+        <CustomTextTitle label={'Thông tin người thuê'} />
 
         <CustomInput
           type={'input'}
@@ -136,15 +137,21 @@ const AddNewTenant = () => {
           important={true}
         />
 
-        <Text style={[styles.label, {marginTop: 20}]}>Họ và tên</Text>
-        <View style={styles.viewtextInput}>
-          <TextInput placeholder="Nhập họ và tên" />
-        </View>
+        <CustomInput
+          type={'input'}
+          styleViewInput={{marginTop: 20}}
+          title={'Họ và tên'}
+          placeholder="Nhập họ và tên"
+          onPress={() => {}}
+        />
 
-        <Text style={[styles.label, {marginTop: 20}]}>Email</Text>
-        <View style={styles.viewtextInput}>
-          <TextInput placeholder="Nhập email" />
-        </View>
+        <CustomInput
+          type={'input'}
+          styleViewInput={{marginTop: 20}}
+          title={'Email'}
+          placeholder="Nhập email"
+          onPress={() => {}}
+        />
 
         <CustomInput
           type={'button'}
@@ -186,26 +193,28 @@ const AddNewTenant = () => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle, {marginVertical: 10}]}>
-          Thêm ảnh CMND/ CCCD
-        </Text>
-        {albumImage.length > 0 ? (
-          <FlatList
-            horizontal
-            data={albumImage}
-            keyExtractor={uuid}
-            renderItem={({item}) => renderImage(item)}
-          />
-        ) : (
-          <CustomButton
-            styleButton={{flex: 1}}
-            label={'Tải lên ảnh mặt trước và mặt sau của CMND/ CCCD'}
-            styleLabel={[styles.title, {marginTop: 5}]}
-            disabled={true}
-            icon={icons.ic_upload}
-            styleIcon={{with: 100, height: 100, alignSelf: 'center'}}
-          />
-        )}
+        <CustomTextTitle label={'Thêm ảnh CMND/ CCCD'} />
+
+        <View style={styles.viewShowImage}>
+          {albumImage.length > 0 ? (
+            <FlatList
+              horizontal
+              data={albumImage}
+              keyExtractor={uuid}
+              renderItem={({item}) => renderImage(item)}
+            />
+          ) : (
+            <CustomButton
+              styleButton={{flex: 1}}
+              label={'Tải lên ảnh mặt trước và mặt sau của CMND/ CCCD'}
+              styleLabel={[{marginTop: 5, textAlign: 'center'}]}
+              disabled={true}
+              icon={icons.ic_upload}
+              styleIcon={{with: 100, height: 100, alignSelf: 'center'}}
+            />
+          )}
+        </View>
+
         <CustomButton
           styleButton={[styles.buttonUploadIM]}
           label={'Thêm ảnh CMND/ CCCD'}
@@ -216,7 +225,7 @@ const AddNewTenant = () => {
         <View style={{height: 56}} />
       </ScrollView>
       <CustomTwoButtonBottom
-        leftLabel={'Trở lại'}
+        leftLabel={'Hủy'}
         rightLabel={'Tiếp tục'}
         onPressLeft={() => navigation.goBack()}
         onPressRight={() => {
@@ -260,6 +269,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginRight: 10,
+  },
+  viewShowImage: {
+    height: 200,
+    borderWidth: 0.5,
+    borderColor: colors.mainColor,
+    marginVertical: 5,
+    borderRadius: 10,
   },
 });
 export default AddNewTenant;

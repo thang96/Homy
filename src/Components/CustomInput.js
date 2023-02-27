@@ -18,7 +18,8 @@ const CustomInput = props => {
   } = props;
   return (
     <View style={styleViewInput}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View
+        style={{flexDirection: 'row', alignItems: 'center', marginBottom: 3}}>
         <Text style={styles.label}>{title}</Text>
         {important && <Text style={{color: 'red', fontSize: 14}}> *</Text>}
       </View>
@@ -47,24 +48,27 @@ const CustomInput = props => {
   );
 };
 const styles = StyleSheet.create({
-  label: {fontSize: 15, color: 'black', fontWeight: '500'},
+  label: {fontSize: 15, color: '#374047'},
   viewButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: 50,
     flex: 1,
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 4,
     alignItems: 'center',
     borderColor: 'grey',
     paddingHorizontal: 5,
+    backgroundColor: '#f8f9f9',
+    borderColor: '#dadee0',
   },
   viewInput: {
     borderWidth: 1,
-    borderColor: 10,
+    borderColor: '#dadee0',
     paddingHorizontal: 10,
-    borderRadius: 10,
+    borderRadius: 5,
     backgroundColor: '#f8f9f9',
+    height: 48,
   },
   icon: {width: 20, height: 20},
 });

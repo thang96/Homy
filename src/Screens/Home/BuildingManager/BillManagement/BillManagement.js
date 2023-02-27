@@ -12,12 +12,10 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import CustomAppBar from '../../../../Components/CustomAppBar';
-import CustomTwoButtonBottom from '../../../../Components/CustomTwoButtonBottom';
 import {icons, colors} from '../../../../Constants';
 // import {ScrollView} from 'react-native-virtualized-view';
 import CustomButton from '../../../../Components/CustomButton';
-import CustomChecker from '../../../../Components/CustomChecker';
+import CustomButtonBottom from '../../../../Components/CustomButtonBottom';
 import CustomSearchAppBar from '../../../../Components/CustomSearchAppBar';
 
 const BillManagement = props => {
@@ -38,14 +36,12 @@ const BillManagement = props => {
   return (
     <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
       <KeyboardAvoidingView style={{flex: 1}}>
-        <CustomAppBar
+        <CustomSearchAppBar
           iconLeft={icons.ic_back}
-          label={'Quản lý hợp đồng'}
+          label={'Quản lý hóa đơn'}
           iconRight={icons.ic_bell}
           iconSecondRight={icons.ic_moreOption}
           pressIconLeft={() => navigation.goBack()}
-        />
-        <CustomSearchAppBar
           keyboard={keyboard}
           textSearch={textSearch}
           value={textSearch}
@@ -64,9 +60,10 @@ const BillManagement = props => {
                 styleButton={[
                   styles.topButton,
                   {
-                    borderBottomWidth: isActive == 1 ? 3 : 0,
                     borderBottomColor:
-                      isActive == 1 ? colors.backgroundButton : 'grey',
+                      isActive == 1
+                        ? colors.backgroundButton
+                        : colors.backgroundGrey,
                   },
                 ]}
                 onPress={() => setIsActive(1)}
@@ -80,9 +77,10 @@ const BillManagement = props => {
                 styleButton={[
                   styles.topButton,
                   {
-                    borderBottomWidth: isActive == 2 ? 3 : 0,
                     borderBottomColor:
-                      isActive == 2 ? colors.backgroundButton : 'grey',
+                      isActive == 2
+                        ? colors.backgroundButton
+                        : colors.backgroundGrey,
                   },
                 ]}
                 onPress={() => setIsActive(2)}
@@ -96,9 +94,10 @@ const BillManagement = props => {
                 styleButton={[
                   styles.topButton,
                   {
-                    borderBottomWidth: isActive == 3 ? 3 : 0,
                     borderBottomColor:
-                      isActive == 3 ? colors.backgroundButton : 'grey',
+                      isActive == 3
+                        ? colors.backgroundButton
+                        : colors.backgroundGrey,
                   },
                 ]}
                 onPress={() => setIsActive(3)}
@@ -112,28 +111,18 @@ const BillManagement = props => {
                 styleButton={[
                   styles.topButton,
                   {
-                    borderBottomWidth: isActive == 4 ? 3 : 0,
                     borderBottomColor:
-                      isActive == 4 ? colors.backgroundButton : 'grey',
+                      isActive == 4
+                        ? colors.backgroundButton
+                        : colors.backgroundGrey,
                   },
                 ]}
                 onPress={() => setIsActive(4)}
               />
             </ScrollView>
-            {/* {isActive == 1 ? (
-              <CustomIsActive />
-            ) : isActive == 2 ? (
-              <CustomOutOfDate />
-            ) : isActive == 3 ? (
-              <CustomLiquidated />
-            ) : null} */}
           </ScrollView>
-          <CustomButton
-            icon={icons.ic_plus}
-            styleButton={styles.styleButton}
+          <CustomButtonBottom
             label={'Thêm dịch vụ mới'}
-            styleLabel={styles.styleLabel}
-            styleIcon={{width: 20, height: 20, tintColor: 'white'}}
             onPress={() => navigation.navigate('AddService')}
           />
         </View>
@@ -147,23 +136,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: colors.backgroundGrey,
   },
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  styleButton: {
-    backgroundColor: colors.mainColor,
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    marginBottom: 5,
-  },
-  styleButton: {
-    backgroundColor: colors.mainColor,
-    height: 50,
-    borderRadius: 10,
-    marginBottom: 5,
-    flexDirection: 'row',
-  },
   styleLabel: {color: 'white', fontWeight: '500', marginLeft: 5},
-  topButton: {marginRight: 15},
+  topButton: {marginRight: 15, borderBottomWidth: 3},
   labelTop: {color: colors.backgroundButton, fontWeight: 'bold', fontSize: 16},
 });
 export default BillManagement;

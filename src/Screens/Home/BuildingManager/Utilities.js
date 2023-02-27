@@ -16,6 +16,7 @@ import {icons, colors} from '../../../Constants';
 import {ScrollView} from 'react-native-virtualized-view';
 import CustomButton from '../../../Components/CustomButton';
 import CustomChecker from '../../../Components/CustomChecker';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 
 const Utilities = props => {
   const navigation = useNavigation();
@@ -64,7 +65,7 @@ const Utilities = props => {
         />
         <ScrollView style={[styles.eachContainer]}>
           <Text style={styles.content}>Chọn tiện ích cho tòa nhà</Text>
-          <Text style={styles.textTitle}>Tiện ích đã thêm</Text>
+          <CustomTextTitle label={'Tiện ích đã thêm'} />
 
           {listSevice.length > 0 ? (
             <FlatList
@@ -105,12 +106,11 @@ const styles = StyleSheet.create({
   eachContainer: {
     flex: 1,
     paddingHorizontal: 10,
-    paddingTop: 10,
     backgroundColor: colors.backgroundGrey,
   },
   textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  content: {color: 'grey', fontSize: 14},
-  viewButton: {alignSelf: 'center', alignItems: 'center', marginVertical: 10},
+  content: {color: 'rgba(127, 138, 147, 1)', fontSize: 13, fontWeight: '400'},
+  viewButton: {alignSelf: 'center', alignItems: 'center', marginVertical: 50},
   styleButton: {
     backgroundColor: colors.mainColor,
     width: 50,

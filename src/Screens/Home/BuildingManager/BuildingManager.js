@@ -11,10 +11,10 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import CustomAppBar from '../../../Components/CustomAppBar';
 import CustomButton from '../../../Components/CustomButton';
+import CustomButtonBottom from '../../../Components/CustomButtonBottom';
 import CustomSearchAppBar from '../../../Components/CustomSearchAppBar';
-import CustomTextInput from '../../../Components/CustomTextInput';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 import {colors, icons, images} from '../../../Constants';
 
 const BuildingManager = () => {
@@ -45,8 +45,8 @@ const BuildingManager = () => {
         pressIconLeft={() => navigation.goBack()}
       />
 
-      <Text style={styles.title}>Tòa nhà hiện có</Text>
       <ScrollView style={{paddingHorizontal: 10}}>
+        <CustomTextTitle label={'Tòa nhà hiện có'} />
         <CustomRenderBuilding
           image={images.im_frame1}
           name={'Tòa nhà D1'}
@@ -57,12 +57,8 @@ const BuildingManager = () => {
           onPress={() => navigation.navigate('BuildingInformation')}
         />
       </ScrollView>
-      <CustomButton
-        styleButton={styles.buttonAddBuilding}
-        icon={icons.ic_plus}
-        styleIcon={{width: 25, height: 25, tintColor: 'white', marginRight: 5}}
+      <CustomButtonBottom
         label={'Thêm tòa nhà mới'}
-        styleLabel={styles.labelAddBuilding}
         onPress={() => navigation.navigate('AddBuildings')}
       />
     </View>
@@ -73,17 +69,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.backgroundGrey,
   },
-  buttonAddBuilding: {
-    flexDirection: 'row',
-    height: 50,
-    width: '90%',
-    backgroundColor: colors.mainColor,
-    alignSelf: 'center',
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  labelAddBuilding: {color: 'white', fontSize: 14},
-  title: {fontSize: 16, color: 'black', fontWeight: 'bold', margin: 10},
 });
 
 const CustomRenderBuilding = props => {
@@ -96,7 +81,7 @@ const CustomRenderBuilding = props => {
           flex: 1,
           width: '100%',
           height: '100%',
-          padding: 10,
+          paddingHorizontal: 10,
           justifyContent: 'space-between',
         }}>
         <View style={styleRender.viewRow}>
@@ -135,24 +120,32 @@ const styleRender = StyleSheet.create({
   button: {
     flexDirection: 'row',
     flex: 1,
-    height: 200,
+    height: 116,
     alignItems: 'center',
     padding: 10,
-    elevation: 1,
-    zIndex: 1,
     backgroundColor: 'white',
     margin: 2,
-    borderRadius: 10,
+    padding: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 4,
+    elevation: 4,
+    borderRadius: 4,
+    marginBottom: 20,
   },
-  image: {width: 150, height: 180, borderRadius: 10},
+  image: {width: 76, height: 92, borderRadius: 10},
   viewRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  icon: {width: 20, height: 20, tintColor: 'black', marginRight: 5},
-  name: {fontSize: 16, fontWeight: 'bold', color: 'black'},
+  icon: {width: 18, height: 18, tintColor: 'black', marginRight: 5},
+  name: {fontSize: 14, fontWeight: 'bold', color: 'black'},
   styleButton: {flexDirection: 'row', alignItems: 'center'},
-  address: {fontSize: 11, color: 'grey', marginVertical: 5},
+  address: {fontSize: 9, color: 'grey'},
 });
 export default BuildingManager;

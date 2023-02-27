@@ -387,12 +387,12 @@ const styleBT = StyleSheet.create({
     borderRadius: 32,
   },
   labelNumber: {
-    color: 'black',
+    color: '#374047',
     fontWeight: '600',
-    fontSize: 20,
+    fontSize: 22,
   },
   label: {
-    color: 'black',
+    color: '#374047',
     fontWeight: 'bold',
     fontSize: 14,
     marginTop: 5,

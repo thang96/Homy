@@ -15,10 +15,10 @@ import CustomAppBar from '../../../Components/CustomAppBar';
 import CustomButton from '../../../Components/CustomButton';
 import {ScrollView} from 'react-native-virtualized-view';
 import {colors, icons, images} from '../../../Constants';
-import CustomViewInfor from '../../../Components/CustomViewInfor';
+import CustomInputValue from '../../../Components/CustomInputValue';
 import CustomManagerInfor from '../../../Components/CustomManagerInfor';
 import {FlatList, TextInput} from 'react-native-gesture-handler';
-import CustomChecker from '../../../Components/CustomChecker';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 import CustomPaidService from '../../../Components/CustomPaidService';
 import CustomFreeService from '../../../Components/CustomFreeService';
 import {uuid} from '../../../utils/uuid';
@@ -28,6 +28,7 @@ import CustomModalDateTimePicker from '../../../Components/CustomModalDateTimePi
 import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
 import ImagePicker from 'react-native-image-crop-picker';
 import CustomModalCamera from '../../../Components/CustomModalCamera';
+import CustomSuggest from '../../../Components/CustomSuggest';
 
 const CreateContract = () => {
   const navigation = useNavigation();
@@ -224,11 +225,12 @@ const CreateContract = () => {
         pressIconLeft={() => navigation.goBack()}
       />
       <ScrollView style={{paddingHorizontal: 10, paddingTop: 10}}>
-        <Text style={styles.content}>
-          Vui lòng điền đầy đủ thông tin! Mục có dấu * là bắt buộc
-        </Text>
-
+        <CustomSuggest
+          label={'Vui lòng điền đầy đủ thông tin! Mục có dấu * là bắt buộc'}
+        />
+        <CustomTextTitle label={'Thông tin hợp đồng'} />
         <CustomInput
+          important={true}
           type={'button'}
           styleViewInput={{marginTop: 10}}
           title={'Tòa nhà'}
@@ -236,6 +238,7 @@ const CreateContract = () => {
           onPress={() => {}}
         />
         <CustomInput
+          important={true}
           type={'button'}
           styleViewInput={{marginTop: 20}}
           title={'Phòng'}
@@ -243,6 +246,7 @@ const CreateContract = () => {
           onPress={() => {}}
         />
         <CustomInput
+          important={true}
           type={'button'}
           styleViewInput={{marginTop: 20}}
           title={'Đại diện người cho thuê'}
@@ -264,6 +268,7 @@ const CreateContract = () => {
         />
 
         <CustomInput
+          important={true}
           type={'button'}
           styleViewInput={{marginTop: 20}}
           title={'Ngày bắt đầu tính tiền'}
@@ -272,74 +277,46 @@ const CreateContract = () => {
         />
 
         <CustomInput
+          important={true}
           type={'button'}
           styleViewInput={{marginTop: 20}}
-          title={'Kỹ thanh toán tiền phòng'}
+          title={'Kỳ thanh toán tiền phòng'}
           placeholder={`${1} tháng`}
           onPress={() => {}}
         />
 
-        <Text style={[styles.textTitle, {marginTop: 20}]}>Tiền phòng</Text>
-
-        <View
-          style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
-          <Text style={[styles.label]}>Tiền thuê phòng</Text>
-          <Text style={{color: 'red', fontSize: 14}}> *</Text>
-        </View>
-        <View style={styles.viewSurrounded}>
-          <TextInput
-            keyboardType="numeric"
-            placeholder="Nhập số tiền thuê"
-            style={{flex: 1}}
-          />
-          <Text style={styles.time}>VNĐ</Text>
-        </View>
-        <View
-          style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
-          <Text style={[styles.label]}>Tiền cọc</Text>
-          <Text style={{color: 'red', fontSize: 14}}> *</Text>
-        </View>
-        <View style={styles.viewSurrounded}>
-          <TextInput
-            keyboardType="numeric"
-            placeholder="Nhập số cọc"
-            style={{flex: 1}}
-          />
-          <Text style={styles.time}>VNĐ</Text>
-        </View>
+        <CustomTextTitle label={'Tiền phòng'} />
+        <CustomInputValue
+          type={'button'}
+          label={'Tiền thuê phòng'}
+          important={true}
+          value={'1500000'}
+          unit={'VNĐ'}
+        />
+        <CustomInputValue
+          viewContainer={{marginTop: 20}}
+          type={'button'}
+          label={'Tiền cọc'}
+          important={true}
+          value={'500000'}
+          unit={'VNĐ'}
+        />
 
         <View style={styles.line} />
 
-        <View style={styles.viewRow}>
-          <Text style={[styles.textTitle, {marginTop: 20}]}>
-            Đại diện người cho thuê
-          </Text>
-          <CustomButton
-            styleButton={styles.customButton}
-            icon={icons.ic_plus}
-            label={'Thêm mới'}
-            styleIcon={styles.styleIcon}
-            styleLabel={styles.styleLabel}
-          />
-        </View>
+        <CustomTextTitle
+          label={'Đại diện người cho thuê'}
+          labelButton={'Thêm mới'}
+        />
 
         <View style={styles.line} />
 
-        <View style={styles.viewRow}>
-          <Text style={[styles.textTitle, {marginTop: 20}]}>
-            Dịch vụ có phí
-          </Text>
-          <CustomButton
-            styleButton={styles.customButton}
-            icon={icons.ic_plus}
-            label={'Thêm mới'}
-            styleIcon={styles.styleIcon}
-            styleLabel={styles.styleLabel}
-          />
-        </View>
-        <Text style={{color: 'grey'}}>
-          Chọn dịch vụ tính phí đã có hoặc thêm mới dịch vụ
-        </Text>
+        <CustomTextTitle label={'Dịch vụ có phí'} labelButton={'Thêm mới'} />
+
+        <CustomSuggest
+          label={'Chọn dịch vụ tính phí đã có hoặc thêm mới dịch vụ'}
+        />
+
         {listPaidSevice.length > 0 ? (
           <FlatList
             listKey="listPaidSevice"
@@ -358,27 +335,17 @@ const CreateContract = () => {
 
         <View style={styles.line} />
 
-        <View style={styles.viewRow}>
-          <Text style={[styles.textTitle, {marginTop: 20}]}>
-            Tiện ích miễn phí
-          </Text>
-          <CustomButton
-            styleButton={styles.customButton}
-            icon={icons.ic_plus}
-            label={'Thêm mới'}
-            styleIcon={styles.styleIcon}
-            styleLabel={styles.styleLabel}
-          />
-        </View>
-        <Text style={{fontSize: 14, color: 'grey'}}>
-          Chọn tiện ích miễn phí đã có hoặc thêm mới tiện ích
-        </Text>
+        <CustomTextTitle label={'Tiện ích miễn phí'} labelButton={'Thêm mới'} />
+
+        <CustomSuggest
+          label={'Chọn tiện ích miễn phí đã có hoặc thêm mới tiện ích'}
+        />
         {listFreeSevice.length > 0 ? (
           <FlatList
             listKey="listFreeSevice"
             horizontal={false}
             scrollEnabled={false}
-            numColumns={2}
+            numColumns={3}
             keyExtractor={key => key.value}
             data={listFreeSevice}
             renderItem={({item, index}) => renderFreeSevice(item, index)}
@@ -391,15 +358,8 @@ const CreateContract = () => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle]}>Thêm ảnh hợp đồng</Text>
-        <View
-          style={{
-            height: 200,
-            borderWidth: 0.5,
-            borderColor: colors.mainColor,
-            marginVertical: 5,
-            borderRadius: 10,
-          }}>
+        <CustomTextTitle label={'Thêm ảnh hợp đồng'} />
+        <View style={styles.viewShowImage}>
           {albumImage.length > 0 ? (
             <FlatList
               horizontal
@@ -427,19 +387,12 @@ const CreateContract = () => {
         />
 
         <View style={styles.line} />
-        <View style={styles.viewRow}>
-          <Text style={[styles.textTitle, {marginTop: 20}]}>
-            Danh sách người ở
-          </Text>
-          <CustomButton
-            styleButton={styles.customButton}
-            icon={icons.ic_plus}
-            label={'Thêm mới'}
-            styleIcon={styles.styleIcon}
-            styleLabel={styles.styleLabel}
-            onPress={() => navigation.navigate('TenantList')}
-          />
-        </View>
+
+        <CustomTextTitle
+          label={'Danh sách người thuê'}
+          labelButton={'Thêm mới'}
+          onPress={() => navigation.navigate('TenantList')}
+        />
 
         <View style={{height: 56}} />
       </ScrollView>
@@ -456,24 +409,6 @@ const CreateContract = () => {
 };
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: colors.backgroundGrey},
-  content: {color: 'grey', fontSize: 14},
-  label: {fontSize: 15, color: 'black', fontWeight: '500'},
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  viewSurrounded: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    marginTop: 5,
-    borderRadius: 10,
-    borderColor: 'grey',
-  },
-  time: {
-    backgroundColor: '#ebedee',
-    borderRadius: 5,
-    color: 'black',
-    fontSize: 14,
-  },
   line: {
     height: 1,
     width: '100%',
@@ -481,22 +416,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     marginVertical: 20,
   },
-  viewRow: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
+  textPicker: {fontSize: 15, fontWeight: '400', color: 'rgba(254, 122, 55, 1)'},
+  pickerTotal: {
+    fontSize: 15,
+    color: 'rgba(254, 122, 55, 1)',
+    fontWeight: '600',
   },
-  customButton: {
-    height: 40,
-    paddingHorizontal: 10,
-    backgroundColor: colors.backgroundButton,
-    borderRadius: 10,
-    flexDirection: 'row',
-  },
-  styleIcon: {width: 20, height: 20, tintColor: 'white'},
-  styleLabel: {marginLeft: 5, color: 'white', fontSize: 14},
-  textPicker: {fontSize: 14, color: 'orange'},
-  pickerTotal: {fontSize: 15, color: 'orange', fontWeight: 'bold'},
   buttonUploadIM: {
     height: 50,
     backgroundColor: colors.mainColor,
@@ -514,6 +439,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginRight: 10,
+  },
+  viewShowImage: {
+    height: 200,
+    borderWidth: 0.5,
+    borderColor: colors.mainColor,
+    marginVertical: 5,
+    borderRadius: 10,
   },
 });
 export default CreateContract;

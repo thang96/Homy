@@ -11,11 +11,13 @@ import {colors, icons} from '../Constants';
 import CustomButton from './CustomButton';
 
 const CustomFreeService = props => {
-  const widthImage = Dimensions.get('window').width / 2 - 15;
+  const widthImage = Dimensions.get('window').width / 3 - 10;
   const {label, value, onPress} = props;
   return (
     <View style={[styles.container, {width: widthImage}]}>
-      <Text style={[styles.text]}>{label}</Text>
+      <View style={{flex: 1}}>
+        <Text style={[styles.text]}>{label}</Text>
+      </View>
       <CustomButton
         icon={icons.ic_close}
         styleIcon={styles.styleIcon}
@@ -29,23 +31,15 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 60,
+    minHeight: 38,
     backgroundColor: colors.mainColor,
     elevation: 1,
     zIndex: 1,
-    padding: 2,
-    borderRadius: 10,
-    paddingHorizontal: 8,
-    margin: 2.5,
+    borderRadius: 5,
+    paddingHorizontal: 5,
+    margin: 2,
   },
-  styleIcon: {width: 15, height: 15, tintColor: 'white'},
-  styleButton: {
-    position: 'absolute',
-    right: 0,
-    alignSelf: 'center',
-    width: 50,
-    height: 50,
-  },
-  text: {fontSize: 12, color: 'white'},
+  styleIcon: {width: 12, height: 12, tintColor: 'white', marginLeft: 3},
+  text: {fontSize: 13, fontWeight: '400', color: 'white'},
 });
 export default CustomFreeService;

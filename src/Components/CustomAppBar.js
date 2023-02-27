@@ -51,13 +51,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.mainColor,
   },
-  icon: {width: 25, height: 25, tintColor: 'white'},
+  icon: {width: 24, height: 24, tintColor: 'white'},
   label: {
     color: 'white',
     marginLeft: 8,
     flex: 1,
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 17,
+    fontWeight: '600',
+    fontFamily: 'sf-pro-text-semibold',
+    letterSpacing: -0.5,
   },
   styleButton: {width: 25, height: 56, marginHorizontal: 10},
 });

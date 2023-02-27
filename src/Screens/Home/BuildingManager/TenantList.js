@@ -11,23 +11,13 @@ import {
   Dimensions,
   SectionList,
 } from 'react-native';
-import CustomAppBar from '../../../Components/CustomAppBar';
 import CustomButton from '../../../Components/CustomButton';
 import {ScrollView} from 'react-native-virtualized-view';
 import {colors, icons, images} from '../../../Constants';
-import CustomViewInfor from '../../../Components/CustomViewInfor';
 import CustomManagerInfor from '../../../Components/CustomManagerInfor';
 import {FlatList, TextInput} from 'react-native-gesture-handler';
-import CustomChecker from '../../../Components/CustomChecker';
-import CustomPaidService from '../../../Components/CustomPaidService';
-import CustomFreeService from '../../../Components/CustomFreeService';
-import {uuid} from '../../../utils/uuid';
-import CustomInput from '../../../Components/CustomInput';
-import CustomTimeButtons from '../../../Components/CustomTimeButton';
-import CustomModalDateTimePicker from '../../../Components/CustomModalDateTimePicker';
-import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
-import ImagePicker from 'react-native-image-crop-picker';
 import CustomSearchAppBar from '../../../Components/CustomSearchAppBar';
+import CustomButtonBottom from '../../../Components/CustomButtonBottom';
 
 const TenantList = () => {
   const navigation = useNavigation();
@@ -64,18 +54,17 @@ const TenantList = () => {
 
   return (
     <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
-      <CustomAppBar
+      <CustomSearchAppBar
         iconLeft={icons.ic_back}
         label={'Danh sách người thuê'}
         iconRight={icons.ic_bell}
         iconSecondRight={icons.ic_moreOption}
-      />
-      <CustomSearchAppBar
         keyboard={keyboard}
         textSearch={textSearch}
         value={textSearch}
         onChangeText={text => setTextSearch(text)}
         placeholder={'Tìm kiếm...'}
+        pressIconLeft={() => navigation.goBack()}
       />
       <ScrollView style={{paddingHorizontal: 10, paddingTop: 10}}>
         {listTenants.length > 0 ? (
@@ -89,28 +78,14 @@ const TenantList = () => {
           />
         ) : null}
       </ScrollView>
-      <CustomButton
-        styleButton={styles.buttonAddBuilding}
-        icon={icons.ic_plus}
-        styleIcon={{width: 25, height: 25, tintColor: 'white', marginRight: 5}}
+
+      <CustomButtonBottom
         label={'Thêm mới người thuê'}
-        styleLabel={styles.labelAddBuilding}
         onPress={() => navigation.navigate('AddNewTenant')}
       />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  buttonAddBuilding: {
-    flexDirection: 'row',
-    height: 50,
-    width: '90%',
-    backgroundColor: colors.mainColor,
-    alignSelf: 'center',
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  labelAddBuilding: {color: 'white', fontSize: 14},
-});
+const styles = StyleSheet.create({});
 export default TenantList;

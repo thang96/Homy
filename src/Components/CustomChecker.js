@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {icons} from '../Constants';
+import {colors, icons} from '../Constants';
 import CustomButton from './CustomButton';
 
 const CustomChecker = props => {
@@ -45,17 +45,26 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 60,
-    backgroundColor: 'white',
+    height: 52,
+    backgroundColor: '#f8f9f9',
     elevation: 1,
     zIndex: 1,
     padding: 2,
-    borderRadius: 10,
+    borderRadius: 4,
     paddingHorizontal: 8,
     margin: 2.5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
   icon: {width: 20, height: 20},
-  styleIcon: {width: 15, height: 15},
+  styleIcon: {width: 18, height: 18, tintColor: '#4dc7c2'},
   styleButton: {
     position: 'absolute',
     right: 0,

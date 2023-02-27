@@ -27,7 +27,9 @@ const CustomTimeButtons = props => {
             style={[styles.viewButton, styleButtonLeft]}
             onPress={onPressLeft}>
             <Text style={styles.label}>{leftLabel}</Text>
-            <Text style={styles.time}>{`${valueLeft}`}</Text>
+            <View style={styles.backgroundValue}>
+              <Text style={styles.time}>{`${valueLeft}`}</Text>
+            </View>
           </TouchableOpacity>
         )}
         {rightLabel && (
@@ -35,7 +37,9 @@ const CustomTimeButtons = props => {
             style={[styles.viewButton, styleButtonRight]}
             onPress={onPressRightt}>
             <Text style={styles.label}>{rightLabel}</Text>
-            <Text style={styles.time}>{`${valueRight}`}</Text>
+            <View style={styles.backgroundValue}>
+              <Text style={styles.time}>{`${valueRight}`}</Text>
+            </View>
           </TouchableOpacity>
         )}
       </View>
@@ -48,23 +52,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  label: {fontSize: 15, color: 'black', fontWeight: '500'},
+  label: {fontSize: 15, color: '#374047'},
   viewButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 50,
+    height: 48,
     flex: 1,
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 5,
     alignItems: 'center',
-    borderColor: 'grey',
+    borderColor: '#dadee0',
     paddingHorizontal: 5,
+    backgroundColor: colors.backgroundButtonGrey,
   },
   time: {
-    backgroundColor: '#ebedee',
     borderRadius: 5,
-    color: 'black',
+    color: '#5c6469',
     fontSize: 14,
+  },
+  backgroundValue: {
+    backgroundColor: '#ebedee',
+    height: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 3,
+    borderRadius: 4,
   },
 });
 export default CustomTimeButtons;

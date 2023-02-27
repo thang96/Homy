@@ -11,9 +11,8 @@ import {
   FlatList,
   Keyboard,
 } from 'react-native';
-import CustomAppBar from '../../../Components/CustomAppBar';
-import CustomButton from '../../../Components/CustomButton';
-import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
+
+import CustomButtonBottom from '../../../Components/CustomButtonBottom';
 import {icons, colors} from '../../../Constants';
 import CustomChecker from '../../../Components/CustomChecker';
 import {ScrollView} from 'react-native-virtualized-view';
@@ -68,20 +67,19 @@ const ServiceManager = props => {
   return (
     <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
       <KeyboardAvoidingView style={{flex: 1}}>
-        <CustomAppBar
+        <CustomSearchAppBar
           iconLeft={icons.ic_back}
           label={'Quản lý dịch vụ'}
           iconRight={icons.ic_bell}
           iconSecondRight={icons.ic_moreOption}
           pressIconLeft={() => navigation.goBack()}
-        />
-        <CustomSearchAppBar
           keyboard={keyboard}
           textSearch={textSearch}
           value={textSearch}
           onChangeText={text => setTextSearch(text)}
           placeholder={'Tìm kiếm...'}
         />
+
         <View style={{flex: 1, paddingHorizontal: 10}}>
           <ScrollView style={[styles.eachContainer]}>
             {listSevice.length > 0 ? (
@@ -98,12 +96,8 @@ const ServiceManager = props => {
             ) : null}
           </ScrollView>
 
-          <CustomButton
-            icon={icons.ic_plus}
-            styleButton={styles.styleButton}
+          <CustomButtonBottom
             label={'Thêm dịch vụ mới'}
-            styleLabel={styles.styleLabel}
-            styleIcon={{width: 20, height: 20, tintColor: 'white'}}
             onPress={() => navigation.navigate('AddService')}
           />
         </View>

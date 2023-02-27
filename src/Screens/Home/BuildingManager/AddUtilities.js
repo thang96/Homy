@@ -15,6 +15,7 @@ import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
 import {icons, colors} from '../../../Constants';
 import {ScrollView} from 'react-native-virtualized-view';
 import CustomInput from '../../../Components/CustomInput';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 
 const AddUtilities = props => {
   const navigation = useNavigation();
@@ -33,10 +34,9 @@ const AddUtilities = props => {
           <Text style={styles.content}>
             Chọn dịch vụ tính phí đã có hoặc thêm mới dịch vụ
           </Text>
-          <Text style={styles.textTitle}>Thông tin dịch vụ</Text>
+          <CustomTextTitle label={'Thông tin dịch vụ'} />
 
           <CustomInput
-            styleViewInput={{marginTop: 20}}
             type={'input'}
             title={'Tên tiện ích'}
             placeholder={'Nhập tên tiện ích'}
@@ -51,7 +51,7 @@ const AddUtilities = props => {
 
         <CustomTwoButtonBottom
           leftLabel={'Trở lại'}
-          rightLabel={'Xác nhận'}
+          rightLabel={'Hoàn tất'}
           onPressLeft={() => navigation.goBack()}
           onPressRight={() => {
             console.log('do some thing');
@@ -68,15 +68,15 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: colors.backgroundGrey,
   },
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  content: {color: 'grey', fontSize: 14, fontWeight: '500'},
-  label: {fontSize: 15, color: 'black', fontWeight: '500'},
+  content: {color: 'rgba(127, 138, 147, 1)', fontSize: 13, fontWeight: '400'},
+  label: {fontSize: 15, color: 'rgba(55, 64, 71, 1)', fontWeight: '400'},
   viewTextInput: {
-    height: 200,
+    height: 120,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: colors.mainColor,
+    borderColor: colors.borderInput,
     padding: 10,
+    backgroundColor: colors.backgroundInput,
   },
 });
 export default AddUtilities;

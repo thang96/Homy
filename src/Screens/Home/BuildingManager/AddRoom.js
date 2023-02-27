@@ -23,10 +23,11 @@ import CustomPaidService from '../../../Components/CustomPaidService';
 import CustomFreeService from '../../../Components/CustomFreeService';
 import {uuid} from '../../../utils/uuid';
 import CustomInput from '../../../Components/CustomInput';
-import CustomInputText from '../../../Components/CustomTextInput';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
 import CustomModalCamera from '../../../Components/CustomModalCamera';
 import ImagePicker from 'react-native-image-crop-picker';
+import CustomInputValue from '../../../Components/CustomInputValue';
 
 const AddRoom = () => {
   const navigation = useNavigation();
@@ -174,15 +175,16 @@ const AddRoom = () => {
         <Text style={styles.content}>
           Vui lòng điền đầy đủ thông tin! Mục có dấu * là bắt buộc
         </Text>
-
+        <CustomTextTitle label={'Thông tin phòng'} />
         <CustomInput
+          important={true}
           type={'button'}
-          styleViewInput={{marginTop: 10}}
           title={'Tòa nhà'}
           placeholder={'Chọn tòa nhà'}
           onPress={() => {}}
         />
         <CustomInput
+          important={true}
           keyboardType={'numeric'}
           type={'input'}
           styleViewInput={{marginTop: 10}}
@@ -192,6 +194,7 @@ const AddRoom = () => {
           onChangeText={text => {}}
         />
         <CustomInput
+          important={true}
           type={'input'}
           styleViewInput={{marginTop: 10}}
           title={'Tên phòng'}
@@ -200,6 +203,7 @@ const AddRoom = () => {
           onChangeText={text => {}}
         />
         <CustomInput
+          important={true}
           keyboardType={'numeric'}
           type={'input'}
           styleViewInput={{marginTop: 10}}
@@ -209,54 +213,41 @@ const AddRoom = () => {
           onChangeText={text => {}}
         />
         <CustomInput
+          important={true}
           type={'button'}
           styleViewInput={{marginTop: 10}}
           title={'Loại phòng'}
           placeholder={'Chọn loại phòng'}
           onPress={() => {}}
         />
-        <CustomInput
-          type={'button'}
-          styleViewInput={{marginTop: 10}}
-          title={'Loại phòng'}
-          placeholder={'Chọn loại phòng'}
-          onPress={() => {}}
+
+        <CustomInputValue
+          viewContainer={{marginTop: 20}}
+          label={'Diện tích'}
+          type={'input'}
+          placeholder={'Nhập diện tích'}
+          keyboardType={'numeric'}
+          unit={'m2'}
         />
-        <Text style={[styles.label, {marginTop: 10}]}>Diện tích</Text>
-        <View style={styles.viewSurrounded}>
-          <TextInput
-            keyboardType="numeric"
-            placeholder="Nhập diện tích"
-            style={{flex: 1}}
-          />
-          <Text style={styles.time}>m2</Text>
-        </View>
 
-        <Text style={[styles.label, {marginTop: 10}]}>
-          Giới hạn số người cho thuê
-        </Text>
-        <View style={styles.viewSurrounded}>
-          <TextInput
-            keyboardType="numeric"
-            placeholder="Nhập giới hạn số người cho thuê"
-            style={{flex: 1}}
-          />
-          <Text style={styles.time}>Người</Text>
-        </View>
+        <CustomInputValue
+          viewContainer={{marginTop: 20}}
+          label={'Giới hạn số người cho thuê'}
+          type={'input'}
+          placeholder={'Nhập số người'}
+          keyboardType={'numeric'}
+          unit={'Người'}
+        />
 
-        <View
-          style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
-          <Text style={[styles.label]}>Tiền đặt cọc</Text>
-          <Text style={{color: 'red', fontSize: 14}}> *</Text>
-        </View>
-        <View style={styles.viewSurrounded}>
-          <TextInput
-            keyboardType="numeric"
-            placeholder="Nhập số tiền cọc khi khách thuê"
-            style={{flex: 1}}
-          />
-          <Text style={styles.time}>VNĐ</Text>
-        </View>
+        <CustomInputValue
+          viewContainer={{marginTop: 20}}
+          important={true}
+          label={'Tiền đặt cọc'}
+          type={'input'}
+          placeholder={'Nhập số tiền cọc khi khách thuê'}
+          keyboardType={'numeric'}
+          unit={'VNĐ'}
+        />
 
         <Text style={[styles.label, {marginTop: 10}]}>Mô tả</Text>
         <View style={styles.viewTextInput}>
@@ -271,8 +262,8 @@ const AddRoom = () => {
         </View>
 
         <View style={styles.line} />
-        <Text style={[styles.textTitle]}>Dịch vụ có phí</Text>
-        <Text style={{fontSize: 14, color: 'grey'}}>
+        <CustomTextTitle label={'Dịch vụ có phí'} />
+        <Text style={{fontSize: 13, color: '#7F8A93'}}>
           Chỉnh sửa dịch vụ phòng sẽ không ảnh hưởng đến dịch vụ của tòa nhà
         </Text>
         {listPaidSevice.length > 0 ? (
@@ -292,8 +283,8 @@ const AddRoom = () => {
         </View>
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle]}>Tiện ích miễn phí</Text>
-        <Text style={{fontSize: 14, color: 'grey'}}>
+        <CustomTextTitle label={'Tiện ích miễn phí'} />
+        <Text style={{fontSize: 13, color: '#7F8A93'}}>
           Chỉnh sửa dịch vụ phòng sẽ không ảnh hưởng đến dịch vụ của tòa nhà
         </Text>
         {listFreeSevice.length > 0 ? (
@@ -301,7 +292,7 @@ const AddRoom = () => {
             listKey="listFreeSevice"
             horizontal={false}
             scrollEnabled={false}
-            numColumns={2}
+            numColumns={3}
             keyExtractor={key => key.value}
             data={listFreeSevice}
             renderItem={({item, index}) => renderFreeSevice(item, index)}
@@ -314,7 +305,7 @@ const AddRoom = () => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle]}>Thêm hình ảnh</Text>
+        <CustomTextTitle label={'Thêm hình ảnh'} />
         <View
           style={{
             height: 200,
@@ -364,30 +355,18 @@ const AddRoom = () => {
 };
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: colors.backgroundGrey},
-  content: {color: 'grey', fontSize: 14},
-  viewSurrounded: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    marginTop: 5,
-    borderRadius: 10,
-    borderColor: 'grey',
-  },
+  content: {color: '#7F8A93', fontSize: 13},
+
   textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  label: {fontSize: 15, color: 'black', fontWeight: '500'},
-  time: {
-    backgroundColor: '#ebedee',
-    borderRadius: 5,
-    color: 'black',
-    fontSize: 14,
-  },
+  label: {fontSize: 15, color: '#5f666b'},
+
   viewTextInput: {
-    minHeight: 150,
+    minHeight: 120,
     borderWidth: 1,
     backgroundColor: 'rgba(116,116,116,0.1)',
     borderRadius: 10,
     paddingHorizontal: 10,
+    borderColor: colors.borderInput,
   },
   line: {
     height: 1,
@@ -396,8 +375,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     marginVertical: 20,
   },
-  textPicker: {fontSize: 14, color: 'orange'},
-  pickerTotal: {fontSize: 15, color: 'orange', fontWeight: 'bold'},
+  textPicker: {fontSize: 15, fontWeight: '400', color: 'rgba(254, 122, 55, 1)'},
+  pickerTotal: {
+    fontSize: 15,
+    color: 'rgba(254, 122, 55, 1)',
+    fontWeight: '600',
+  },
   buttonUploadIM: {
     height: 50,
     backgroundColor: colors.mainColor,

@@ -11,17 +11,18 @@ import {
   Dimensions,
   SectionList,
 } from 'react-native';
-import CustomAppBar from '../../../Components/CustomAppBar';
+import CustomButtonBottom from '../../../Components/CustomButtonBottom';
 import CustomButton from '../../../Components/CustomButton';
 import {ScrollView} from 'react-native-virtualized-view';
 import {colors, icons, images} from '../../../Constants';
 import CustomViewInfor from '../../../Components/CustomViewInfor';
-import CustomManagerInfor from '../../../Components/CustomManagerInfor';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 import {FlatList} from 'react-native-gesture-handler';
-import CustomChecker from '../../../Components/CustomChecker';
+import File from '../../../Assets/Svgs/File.svg';
 import CustomPaidService from '../../../Components/CustomPaidService';
 import CustomFreeService from '../../../Components/CustomFreeService';
 import {uuid} from '../../../utils/uuid';
+import CustomAppBarRoomInfor from '../../../Components/CustomAppBarRoomInfor';
 
 const RoomInformation = props => {
   const navigation = useNavigation();
@@ -79,18 +80,10 @@ const RoomInformation = props => {
   };
   return (
     <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
-      <CustomAppBar
-        iconLeft={icons.ic_back}
-        label={'Thông tin tầng'}
-        iconRight={icons.ic_bell}
-        iconSecondRight={icons.ic_moreOption}
-        pressIconLeft={() => navigation.goBack()}
-      />
-      <CustomSecondAppBar />
+      <CustomAppBarRoomInfor onPressLeft={() => navigation.goBack()} />
       <ScrollView style={{paddingHorizontal: 10, paddingTop: 10}}>
-        <Text style={[styles.textTitle, {marginBottom: 10}]}>
-          Thông tin phòng
-        </Text>
+        <CustomTextTitle label={'Thông tin phòng'} />
+
         <View style={styles.viewRow}>
           <CustomViewInfor title={'Tầng'} label={'1'} />
           <CustomViewInfor title={'Diện tích'} label={'10'} content={'m2'} />
@@ -111,37 +104,23 @@ const RoomInformation = props => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle, {marginBottom: 10}]}>
-          Hợp đồng cho thuê
-        </Text>
+        <CustomTextTitle label={'Hợp đồng cho thuê'} />
 
         <CustomContract />
 
         <View style={styles.line} />
 
-        <View style={[styles.viewRow, {marginBottom: 10}]}>
-          <Text style={[styles.textTitle]}>Thông tin người ở</Text>
-          <CustomButton
-            styleButton={[
-              styles.buttonEdit,
-              {
-                marginTop: 3,
-                backgroundColor: colors.backgroundButton,
-                height: 40,
-              },
-            ]}
-            icon={icons.ic_plus}
-            styleIcon={[styles.iconEdit]}
-            label={'Thêm người'}
-            styleLabel={styles.labelEdit}
-          />
-        </View>
+        <CustomTextTitle
+          label={'Thông tin người ở'}
+          labelButton={'Thêm người'}
+        />
+
         <CustomTenantInformation styleView={{marginBottom: 10}} />
         <CustomTenantInformation />
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle]}>Dịch vụ có phí</Text>
+        <CustomTextTitle label={'Dịch vụ có phí'} />
 
         {listPaidSevice.length > 0 ? (
           <FlatList
@@ -160,14 +139,14 @@ const RoomInformation = props => {
         </View>
 
         <View style={styles.line} />
-        <Text style={[styles.textTitle]}>Tiện ích miễn phí</Text>
+        <CustomTextTitle label={'Tiện ích miễn phí'} />
 
         {listFreeSevice.length > 0 ? (
           <FlatList
             listKey="listFreeSevice"
             horizontal={false}
             scrollEnabled={false}
-            numColumns={2}
+            numColumns={3}
             keyExtractor={key => key.value}
             data={listFreeSevice}
             renderItem={({item, index}) => renderFreeSevice(item, index)}
@@ -180,48 +159,30 @@ const RoomInformation = props => {
 
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle]}>Mô tả phòng</Text>
+        <CustomTextTitle label={'Mô tả phòng'} />
         <Text style={{color: 'black', fontSize: 14}}>
           Phòng đầy đủ tiện nghi
         </Text>
         <View style={styles.line} />
 
-        <Text style={[styles.textTitle]}>Lưu ý cho người thuê</Text>
+        <CustomTextTitle label={'Lưu ý cho người thuê'} />
         <Text style={{color: 'black', fontSize: 14}}>
           Lưu ý đi nghủ sớm tránh ảnh hưởng người khác
         </Text>
 
         <View style={styles.line} />
 
-        <CustomButton
-          styleButton={styles.buttomAddFloor}
-          icon={icons.ic_plus}
-          styleIcon={styles.iconAddFloor}
-          label={'Thêm phòng mới'}
-          styleLabel={styles.labelAddFloor}
-        />
-
         <View style={{height: 56}} />
       </ScrollView>
+      <CustomButtonBottom
+        label={'Thêm phòng mới'}
+        onPress={() => navigation.navigate('AddRoom')}
+      />
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: colors.backgroundGrey},
-  appBar: {
-    backgroundColor: colors.mainColor,
-    minHeight: 120,
-    paddingHorizontal: 10,
-    justifyContent: 'center',
-  },
-  whiteLine: {
-    height: 1,
-    width: '100%',
-    alignSelf: 'center',
-    backgroundColor: 'white',
-    position: 'absolute',
-    top: 0,
-  },
   line: {
     height: 1,
     width: '100%',
@@ -235,27 +196,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   textBuilding: {fontSize: 25, fontWeight: 'bold', color: 'white'},
-  iconEdit: {tintColor: 'white', width: 15, height: 15},
-  buttonEdit: {
-    height: 28,
-    flexDirection: 'row',
-    paddingHorizontal: 5,
-    borderRadius: 5,
+  textPicker: {fontSize: 15, fontWeight: '400', color: 'rgba(254, 122, 55, 1)'},
+  pickerTotal: {
+    fontSize: 15,
+    color: 'rgba(254, 122, 55, 1)',
+    fontWeight: '600',
   },
-  labelEdit: {color: 'white', marginLeft: 3, fontSize: 14},
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  buttomAddFloor: {
-    width: '100%',
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: colors.backgroundButton,
-    marginTop: 30,
-    flexDirection: 'row',
-  },
-  iconAddFloor: {width: 20, height: 20, tintColor: 'white', marginRight: 5},
-  labelAddFloor: {fontSize: 16, fontWeight: '500', color: 'white'},
-  textPicker: {fontSize: 14, color: 'orange'},
-  pickerTotal: {fontSize: 15, color: 'orange', fontWeight: 'bold'},
 });
 
 const CustomTenantInformation = props => {
@@ -267,24 +213,27 @@ const CustomTenantInformation = props => {
           backgroundColor: 'rgba(1,1,1,0.1)',
           borderRadius: 10,
           borderLeftWidth: 5,
-          borderLeftColor: colors.backgroundButton,
+          borderLeftColor: colors.green,
           justifyContent: 'center',
           padding: 10,
+          height: 64,
         },
         styleView,
       ]}>
       <View style={styles.viewRow}>
-        <Text style={{fontWeight: 'bold', color: 'black'}}>Nguyễn Văn A</Text>
+        <Text style={{fontWeight: '600', color: '#374047', fontSize: 13}}>
+          Nguyễn Văn A
+        </Text>
         <CustomButton
           label={'Xóa'}
-          styleLabel={{fontWeight: 'bold', color: 'red'}}
+          styleLabel={{fontWeight: '400', color: '#E62154', fontSize: 12}}
         />
       </View>
       <View style={styles.viewRow}>
-        <Text style={{fontWeight: 'bold', color: 'black'}}>
+        <Text style={{fontWeight: '400', color: '#374047', fontSize: 12}}>
           {'SĐT: 0123456789'}
         </Text>
-        <Text style={{fontWeight: 'bold', color: 'black'}}>
+        <Text style={{fontWeight: '400', color: '#374047', fontSize: 12}}>
           {'Ngày vào: 01-02-2022'}
         </Text>
       </View>
@@ -303,59 +252,84 @@ const CustomContract = props => {
         borderLeftColor: colors.backgroundButton,
         justifyContent: 'center',
         padding: 10,
+        height: 110,
       }}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Image
-          source={icons.ic_contract}
-          style={{width: 20, height: 20, tintColor: 'black'}}
-        />
-        <Text
-          style={{marginLeft: 5, color: 'black'}}>{`Số hợp đồng: #12345`}</Text>
-      </View>
-      <View
-        style={{flexDirection: 'row', alignItems: 'center', marginVertical: 5}}>
-        <Text>Thời hạn:</Text>
+        <File width={18} height={18} />
         <Text
           style={{
             marginLeft: 5,
-            color: 'black',
-            fontWeight: 'bold',
+            color: '#5F6E78',
+            fontSize: 13,
+            fontWeight: '400',
+          }}>{`Số hợp đồng: #12345`}</Text>
+      </View>
+      <View
+        style={{flexDirection: 'row', alignItems: 'center', marginVertical: 5}}>
+        <Text
+          style={{
+            color: '#374047',
+            fontFamily: 'sf-pro-text-regular',
+            lineHeight: 18,
+            fontWeight: '400',
+            fontStyle: 'normal',
+            fontSize: 13,
+          }}>
+          Thời hạn:
+        </Text>
+        <Text
+          style={{
+            color: '#374047',
+            fontFamily: 'sf-pro-text-bold',
+            lineHeight: 18,
+            fontWeight: '600',
+            fontStyle: 'normal',
+            letterSpacing: -1,
+            fontSize: 13,
           }}>{`Từ 09-02-2023 Đến 09-03-2025`}</Text>
       </View>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <CustomButton
           styleButton={{
-            height: 40,
+            height: 34,
             borderWidth: 1,
-            borderColor: 'orange',
+            borderColor: colors.backgroundOrange,
             borderRadius: 5,
             paddingHorizontal: 10,
           }}
-          label={'Thanh lý'}
-          styleLabel={{fontWeight: 'bold', color: 'orange'}}
+          label={'Chỉnh sửa'}
+          styleLabel={{
+            fontWeight: '400',
+            color: colors.backgroundOrange,
+            fontSize: 13,
+          }}
         />
         <CustomButton
           styleButton={{
-            height: 40,
+            height: 34,
             borderWidth: 1,
             borderColor: colors.backgroundButton,
             borderRadius: 5,
             paddingHorizontal: 10,
             marginHorizontal: 10,
           }}
-          label={'Xóa'}
-          styleLabel={{fontWeight: 'bold', color: colors.backgroundButton}}
+          label={'Thanh lý'}
+          styleLabel={{
+            fontWeight: '400',
+            color: colors.backgroundButton,
+            fontSize: 13,
+          }}
         />
         <CustomButton
           styleButton={{
-            height: 40,
+            height: 34,
             borderWidth: 1,
             borderColor: 'red',
             borderRadius: 5,
             paddingHorizontal: 10,
           }}
-          label={'Chỉnh sửa'}
-          styleLabel={{fontWeight: 'bold', color: 'red'}}
+          label={'Xóa'}
+          styleLabel={{fontWeight: '400', color: 'red', fontSize: 13}}
         />
       </View>
     </View>
@@ -363,53 +337,3 @@ const CustomContract = props => {
 };
 
 export default RoomInformation;
-
-const CustomSecondAppBar = props => {
-  const {} = props;
-  return (
-    <View style={styles.appBar}>
-      <View style={styles.whiteLine} />
-      <View style={styles.viewRow}>
-        <Text style={styles.textBuilding}>{`Tòa nhà D1 > P101`}</Text>
-        <CustomButton
-          disabled={true}
-          styleButton={[styles.buttonEdit, {backgroundColor: 'orange'}]}
-          label={'Trống'}
-          styleLabel={styles.labelEdit}
-        />
-      </View>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Image
-          source={icons.ic_dollar}
-          style={{width: 20, height: 20, tintColor: 'white', marginVertical: 3}}
-        />
-        <Text style={{color: 'white', fontSize: 14, marginLeft: 5}}>
-          1500000 VNĐ
-        </Text>
-      </View>
-
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <CustomButton
-          styleButton={[
-            styles.buttonEdit,
-            {marginTop: 3, backgroundColor: 'orange'},
-          ]}
-          icon={icons.ic_plus}
-          styleIcon={styles.iconEdit}
-          label={'Thêm phòng nhanh'}
-          styleLabel={styles.labelEdit}
-        />
-        <CustomButton
-          styleButton={[
-            styles.buttonEdit,
-            {marginTop: 3, marginLeft: 10, backgroundColor: '#94d400'},
-          ]}
-          icon={icons.ic_edit}
-          styleIcon={styles.iconEdit}
-          label={'Sửa'}
-          styleLabel={styles.labelEdit}
-        />
-      </View>
-    </View>
-  );
-};

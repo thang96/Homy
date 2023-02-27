@@ -15,6 +15,7 @@ import CustomButton from '../../../Components/CustomButton';
 import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
 import {icons, colors} from '../../../Constants';
 import CustomChecker from '../../../Components/CustomChecker';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 import {ScrollView} from 'react-native-virtualized-view';
 
 const Service = props => {
@@ -53,7 +54,7 @@ const Service = props => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <KeyboardAvoidingView style={{flex: 1}}>
         <CustomAppBar
           iconLeft={icons.ic_back}
@@ -66,7 +67,7 @@ const Service = props => {
           <Text style={styles.content}>
             Chọn dịch vụ tính phí đã có hoặc thêm mới dịch vụ
           </Text>
-          <Text style={styles.textTitle}>Dịch vụ đã thêm</Text>
+          <CustomTextTitle label={'Dịch vụ đã thêm'} />
 
           {listSevice.length > 0 ? (
             <FlatList
@@ -111,9 +112,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: colors.backgroundGrey,
   },
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  content: {color: 'grey', fontSize: 14, fontWeight: '500'},
-  viewButton: {alignSelf: 'center', alignItems: 'center', marginVertical: 10},
+  content: {color: 'rgba(127, 138, 147, 1)', fontSize: 13, fontWeight: '400'},
+  viewButton: {alignSelf: 'center', alignItems: 'center', marginVertical: 50},
   styleButton: {
     backgroundColor: colors.mainColor,
     width: 50,

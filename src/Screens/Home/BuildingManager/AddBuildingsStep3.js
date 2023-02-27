@@ -13,11 +13,12 @@ import {
 import {ScrollView} from 'react-native-virtualized-view';
 import CustomAppBar from '../../../Components/CustomAppBar';
 import CustomButton from '../../../Components/CustomButton';
-import CustomStepAppBar from '../../../Components/CustomStepAppBar';
 import CustomTwoButtonBottom from '../../../Components/CustomTwoButtonBottom';
 import {icons, colors} from '../../../Constants';
 import CustomPaidService from '../../../Components/CustomPaidService';
 import CustomFreeService from '../../../Components/CustomFreeService';
+import CustomAppBarStep from '../../../Components/CustomAppBarStep';
+import CustomTextTitle from '../../../Components/CustomTextTitle';
 
 const AddBuildingsStep3 = props => {
   const navigation = useNavigation();
@@ -38,6 +39,7 @@ const AddBuildingsStep3 = props => {
     {label: 'Máy giặt', value: '5'},
     {label: 'Giờ tự do', value: '6'},
     {label: 'Chăn - màn', value: '7'},
+    {label: 'Thoải mái nói chuyện sau 10h đêm', value: '8'},
   ]);
 
   const renderPaidSevice = (item, index) => {
@@ -77,33 +79,25 @@ const AddBuildingsStep3 = props => {
   return (
     <View style={{flex: 1, backgroundColor: colors.backgroundGrey}}>
       <KeyboardAvoidingView style={{flex: 1}}>
-        <CustomAppBar
+        <CustomAppBarStep
           iconLeft={icons.ic_back}
           label={'Thiết lập dịch vụ'}
           iconRight={icons.ic_bell}
           iconSecondRight={icons.ic_moreOption}
           pressIconLeft={() => navigation.goBack()}
+          step={3}
         />
-        <CustomStepAppBar step={3} />
 
         <ScrollView style={[styles.eachContainer]}>
           <Text style={styles.content}>
             Vui lòng điền đầy đủ thông tin! Mục có dấu * là bắt buộc
           </Text>
 
-          <View style={styles.viewRow}>
-            <Text style={[styles.textTitle, {marginVertical: 5}]}>
-              Dịch vụ có phí
-            </Text>
-            <CustomButton
-              icon={icons.ic_plus}
-              styleIcon={[styles.icon, {tintColor: 'white', marginRight: 5}]}
-              label={'Thêm mới'}
-              styleLabel={{fontWeight: '500', fontSize: 14, color: 'white'}}
-              styleButton={[styles.viewRow, styles.styleButton]}
-              onPress={() => navigation.navigate('Service')}
-            />
-          </View>
+          <CustomTextTitle
+            label={'Dịch vụ có phí'}
+            labelButton={'Thêm mới'}
+            onPress={() => navigation.navigate('Service')}
+          />
 
           {listPaidSevice.length > 0 ? (
             <FlatList
@@ -117,6 +111,7 @@ const AddBuildingsStep3 = props => {
               renderItem={({item, index}) => renderPaidSevice(item, index)}
             />
           ) : null}
+
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text style={styles.textPicker}>Đã chọn </Text>
             <Text style={styles.pickerTotal}>{`${listPaidSevice.length}`}</Text>
@@ -124,19 +119,11 @@ const AddBuildingsStep3 = props => {
 
           <View style={styles.line} />
 
-          <View style={styles.viewRow}>
-            <Text style={[styles.textTitle, {marginVertical: 5}]}>
-              Tiện ích miễn phí
-            </Text>
-            <CustomButton
-              icon={icons.ic_plus}
-              styleIcon={[styles.icon, {tintColor: 'white', marginRight: 5}]}
-              label={'Thêm mới'}
-              styleLabel={{fontWeight: '500', fontSize: 14, color: 'white'}}
-              styleButton={[styles.viewRow, styles.styleButton]}
-              onPress={() => navigation.navigate('Utilities')}
-            />
-          </View>
+          <CustomTextTitle
+            label={'Tiện ích miễn phí'}
+            labelButton={'Thêm mới'}
+            onPress={() => navigation.navigate('Utilities')}
+          />
 
           {listFreeSevice.length > 0 ? (
             <FlatList
@@ -144,7 +131,7 @@ const AddBuildingsStep3 = props => {
               style={{justifyContent: 'space-between'}}
               horizontal={false}
               scrollEnabled={false}
-              numColumns={2}
+              numColumns={3}
               keyExtractor={key => key.value}
               data={listFreeSevice}
               renderItem={({item, index}) => renderFreeSevice(item, index)}
@@ -157,9 +144,9 @@ const AddBuildingsStep3 = props => {
 
           <View style={styles.line} />
 
-          <Text style={[styles.textTitle, {marginVertical: 5}]}>Lưu ý</Text>
+          <CustomTextTitle label={'Lưu ý'} />
 
-          <Text style={[styles.label, {marginTop: 10}]}>Lưu ý của tòa nhà</Text>
+          <Text style={[styles.label]}>Lưu ý của tòa nhà</Text>
           <View style={styles.viewTextInput}>
             <TextInput
               multiline
@@ -194,20 +181,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: colors.backgroundGrey,
   },
-  content: {color: 'grey', fontSize: 14},
-  textTitle: {color: '#173b5f', fontSize: 16, fontWeight: 'bold'},
-  viewRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  icon: {width: 20, height: 20},
-  styleButton: {
-    backgroundColor: colors.backgroundButton,
-    borderRadius: 10,
-    height: 50,
-    paddingHorizontal: 10,
-  },
+  content: {color: 'rgba(127, 138, 147, 1)', fontSize: 13},
   line: {
     width: '100%',
     height: 1,
@@ -215,16 +189,21 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignSelf: 'center',
   },
-  textPicker: {fontSize: 14, color: 'orange'},
-  pickerTotal: {fontSize: 15, color: 'orange', fontWeight: 'bold'},
+  textPicker: {fontSize: 15, fontWeight: '400', color: 'rgba(254, 122, 55, 1)'},
+  pickerTotal: {
+    fontSize: 15,
+    color: 'rgba(254, 122, 55, 1)',
+    fontWeight: '600',
+  },
   viewTextInput: {
     paddingHorizontal: 10,
     borderWidth: 1,
     marginTop: 5,
-    borderRadius: 10,
-    borderColor: colors.mainColor,
-    height: 100,
+    borderRadius: 5,
+    borderColor: colors.borderInput,
+    height: 120,
+    backgroundColor: colors.backgroundInput,
   },
-  label: {fontSize: 15, color: 'black', fontWeight: '500'},
+  label: {fontSize: 15, color: 'rgba(55, 64, 71, 1)', fontWeight: '400'},
 });
 export default AddBuildingsStep3;

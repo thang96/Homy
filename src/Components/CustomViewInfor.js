@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: colors.mainColor,
-    minHeight: 60,
-    borderRadius: 5,
+    borderColor: colors.borderInput,
+    height: 60,
+    borderRadius: 4,
     padding: 10,
   },
   viewRow: {
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  title: {color: 'grey', fontSize: 14},
-  label: {fontSize: 15, fontWeight: 'bold', color: 'black'},
-  content: {fontSize: 15, color: 'black'},
+  title: {color: 'rgba(151, 161, 167, 1)', fontSize: 12},
+  label: {fontSize: 15, fontWeight: '600', color: 'rgba(95, 110, 120, 1)'},
+  content: {fontSize: 13, color: 'rgba(95, 110, 120, 1)'},
 });
 export default CustomViewInfor;

@@ -38,4 +38,5 @@ export default {
   ic_men: require('../Assets/Icons/ic_men.png'),
   ic_dollar: require('../Assets/Icons/ic_dollar.png'),
   ic_circleFill: require('../Assets/Icons/ic_circleFill.png'),
+  ic_hammer: require('../Assets/Icons/ic_hammer.png'),
 };
