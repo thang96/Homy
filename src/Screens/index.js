@@ -2,6 +2,7 @@
 import SplashScreen from './SplashScreen';
 //Login
 import LoginScreen from './Login/LoginScreen';
+import LoginScreenOTP from './Login/LoginScreenOTP';
 //Home
 import HomeScreen from './Home/HomeSreen';
 //--BuildingManager
@@ -30,6 +31,7 @@ export {
   SplashScreen,
   //Login
   LoginScreen,
+  LoginScreenOTP,
   //Home
   HomeScreen,
   //--BuildingManager

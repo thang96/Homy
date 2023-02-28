@@ -61,6 +61,12 @@ const LoginScreen = () => {
           styleLabel={styles.styleLabel}
           onPress={() => loginFuntion()}
         />
+        <CustomButton
+          label={'Login width otp'}
+          styleButton={styles.styleButton}
+          styleLabel={styles.styleLabel}
+          onPress={() => navigation.navigate('LoginScreenOTP')}
+        />
       </ImageBackground>
     </View>
   );
