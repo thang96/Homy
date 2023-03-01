@@ -16,10 +16,11 @@ import {useDispatch} from 'react-redux';
 import {updateToken} from '../../Store/slices/tokenSlice';
 import CustomSuggest from '../../Components/CustomSuggest';
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
   const [numberPhone, setNumberPhone] = useState('');
   const [password, setPassword] = useState('');
   const [isShow, setIsShow] = useState(false);
+  const [agree, setAgree] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const loginFuntion = async () => {
@@ -33,12 +34,27 @@ const LoginScreen = () => {
       source={images.im_backgroundSplash}
       style={styles.imageContainer}>
       <View style={styles.container}>
-        <Text style={styles.title}>Đăng nhập</Text>
+        <CustomButton
+          icon={icons.ic_back}
+          styleIcon={styles.iconBack}
+          styleButton={styles.buttonBack}
+          onPress={() => navigation.goBack()}
+        />
+        <Text style={styles.title}>Đăng ký tài khoản</Text>
         <CustomSuggest
           label={'Ứng dụng cho người thuê nhà'}
           styleSuggest={{marginVertical: 10}}
         />
         <View style={{width: '100%'}}>
+          <Text style={styles.content}>Họ và tên</Text>
+          <CustomTextInput
+            styleViewTextInput={styles.styleViewTextInput}
+            placeholder={'Nhập họ và tên'}
+            value={numberPhone}
+            onChangeText={text => setNumberPhone(text)}
+          />
+        </View>
+        <View style={{width: '100%', marginTop: 10}}>
           <Text style={styles.content}>Số điện thoại</Text>
           <CustomTextInput
             styleViewTextInput={styles.styleViewTextInput}
@@ -60,28 +76,30 @@ const LoginScreen = () => {
             onPressIconRight={() => setIsShow(!isShow)}
           />
         </View>
-        <CustomButton
-          label={'Quên mật khẩu?'}
-          styleLabel={styles.forgotPassword}
-          styleButton={styles.buttonForgotPassword}
-        />
-        <CustomButton
-          label={'Đăng nhập'}
-          styleButton={styles.styleButton}
-          styleLabel={styles.styleLabel}
-          onPress={() => loginFuntion()}
-        />
-
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Text style={{fontSize: 13, color: '#374047'}}>
-            Bạn chưa có tài khoản?
-          </Text>
+        <View style={[styles.viewRow, {marginTop: 20}]}>
           <CustomButton
-            label={'Đăng ký ngay'}
-            styleLabel={{fontSize: 13, color: '#55CCEF', fontWeight: '600'}}
-            onPress={() => navigation.navigate('RegisterScreen')}
+            styleButton={{marginRight: 8}}
+            icon={agree ? icons.ic_check : icons.ic_unCheck}
+            styleIcon={[
+              styles.iconCheckBox,
+              {tintColor: agree ? colors.backgroundButton : '#797979'},
+            ]}
+            onPress={() => {
+              setAgree(prev => (prev == false ? true : false));
+            }}
+          />
+          <Text style={{fontSize: 13, color: '#374047'}}>Đồng ý với </Text>
+          <CustomButton
+            label={'Điều khoản & Dịch vụ'}
+            styleLabel={styles.labelButtonCheck}
           />
         </View>
+        <CustomButton
+          styleButton={styles.buttonNext}
+          label={'Tiếp tục'}
+          styleLabel={styles.labelButtonNext}
+          onPress={() => navigation.navigate('VerifyOtpScreen')}
+        />
       </View>
     </ImageBackground>
   );
@@ -94,6 +112,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  iconBack: {width: 24, height: 24, tintColor: 'white'},
+  buttonBack: {position: 'absolute', top: 10, left: 10},
   title: {color: colors.mainColor, fontWeight: '600', fontSize: 17},
   content: {fontSize: 15, color: '#374047'},
   styleViewTextInput: {
@@ -105,23 +125,20 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundInput,
     paddingHorizontal: 10,
   },
-  styleButton: {
-    width: 180,
-    height: 50,
+  viewRow: {flexDirection: 'row', alignItems: 'center'},
+  iconCheckBox: {width: 20, height: 20},
+  labelButtonCheck: {
+    color: colors.backgroundButton,
+    fontWeight: '600',
+    fontSize: 13,
+  },
+  buttonNext: {
+    width: 200,
+    height: 44,
     backgroundColor: colors.mainColor,
     borderRadius: 5,
-    marginVertical: 30,
+    marginTop: 20,
   },
-  styleLabel: {color: 'white'},
-  forgotPassword: {
-    fontSize: 13,
-    color: colors.backgroundButton,
-    alignSelf: 'flex-end',
-  },
-  buttonForgotPassword: {
-    height: 50,
-    width: '100%',
-    paddingHorizontal: 10,
-  },
+  labelButtonNext: {fontSize: 13, color: 'white'},
 });
-export default LoginScreen;
+export default RegisterScreen;

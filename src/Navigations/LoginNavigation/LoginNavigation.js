@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {LoginScreen, LoginScreenOTP} from '../../Screens';
+import {LoginScreen, RegisterScreen, VerifyOtpScreen} from '../../Screens';
 
 const Stack = createStackNavigator();
 const LoginNavigation = () => {
@@ -14,8 +14,15 @@ const LoginNavigation = () => {
         }}
       />
       <Stack.Screen
-        component={LoginScreenOTP}
-        name={'LoginScreenOTP'}
+        component={RegisterScreen}
+        name={'RegisterScreen'}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={VerifyOtpScreen}
+        name={'VerifyOtpScreen'}
         options={{
           headerShown: false,
         }}

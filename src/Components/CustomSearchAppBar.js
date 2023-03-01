@@ -1,79 +1,40 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, Image, TextInput} from 'react-native';
 import CustomTextInput from './CustomTextInput';
 import CustomButton from './CustomButton';
 import {icons, colors, fonts} from '../Constants';
 
 const CustomSearchAppBar = props => {
-  const {
-    iconLeft,
-    label,
-    iconRight,
-    iconSecondRight,
-    pressIconLeft,
-    pressIconRight,
-    pressSeccodIconRight,
-    keyboard,
-    textSearch,
-    value,
-    placeholder,
-    onChangeText,
-    onPress,
-  } = props;
+  const {label} = props;
   return (
     <View
       style={{
         height: 134,
-        backgroundColor: colors.mainColor,
-        borderBottomLeftRadius: 24,
-        borderBottomRightRadius: 24,
+        paddingHorizontal: 10,
       }}>
       <View style={styles.styleAppBar}>
-        {iconLeft && (
-          <CustomButton
-            styleButton={styles.styleButtonTop}
-            icon={iconLeft}
-            styleIcon={styles.icon}
-            onPress={pressIconLeft}
-          />
-        )}
-        {label && <Text style={styles.label}>{label}</Text>}
-        {iconRight && (
-          <CustomButton
-            styleButton={styles.styleButtonTop}
-            icon={iconRight}
-            styleIcon={styles.icon}
-            onPress={pressIconRight}
-          />
-        )}
-        {iconSecondRight && (
-          <CustomButton
-            styleButton={styles.styleButtonTop}
-            icon={iconSecondRight}
-            styleIcon={styles.icon}
-            onPress={pressSeccodIconRight}
-          />
-        )}
+        <CustomButton icon={icons.ic_back} styleIcon={styles.icon} />
+        <Text style={styles.label}>{label}</Text>
+        <CustomButton icon={icons.ic_bell} styleIcon={[styles.icon]} />
       </View>
-      <View style={styles.viewContainer}>
-        <View style={styles.viewSearch}>
-          <CustomTextInput
-            styleViewTextInput={styles.viewInput}
-            placeholder={placeholder}
-            iconLeft={
-              textSearch == '' && keyboard == false ? icons.ic_search : null
-            }
-            styleIconLeft={styles.styleIconLeft}
-            value={value}
-            onChangeText={onChangeText}
+      <View style={styles.viewLine} />
+      <View style={[styles.viewRow, {marginTop: 10}]}>
+        <View style={[styles.viewRow, styles.viewSearch]}>
+          <Image
+            source={icons.ic_search}
+            style={[styles.icon, {tintColor: colors.mainColor}]}
           />
-          <CustomButton
-            styleButton={styles.styleButton}
-            styleIcon={styles.styleIcon}
-            icon={icons.ic_option}
-            onPress={onPress}
-          />
+          <TextInput placeholder="Tìm kiếm..." style={{flex: 1}} />
         </View>
+        <CustomButton
+          styleButton={{
+            width: 48,
+            height: 48,
+            marginLeft: 10,
+            backgroundColor: colors.mainColor,
+            borderRadius: 10,
+          }}
+        />
       </View>
     </View>
   );
@@ -85,51 +46,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  icon: {width: 24, height: 24, tintColor: 'white'},
+  icon: {width: 24, height: 24, tintColor: '#374047'},
   label: {
-    color: 'white',
+    color: '#374047',
     marginLeft: 8,
     flex: 1,
     fontSize: 17,
-    fontFamily: 'OpenSans-Semibold',
+    fontWeight: '600',
   },
-  styleButtonTop: {width: 25, height: 56, marginHorizontal: 10},
-  viewContainer: {
-    height: 76,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+  viewLine: {
+    width: '100%',
+    height: 1,
+    backgroundColor: 'white',
+    position: 'absolute',
+    top: 56,
+    alignSelf: 'center',
   },
-  viewSearch: {
-    height: 64,
-    backgroundColor: colors.mainColor,
-    borderRadius: 15,
+  viewRow: {
+    height: 48,
     flexDirection: 'row',
-    paddingHorizontal: 10,
-    borderTopWidth: 0.5,
-    borderTopColor: 'white',
     alignItems: 'center',
   },
-  viewInput: {
-    backgroundColor: 'white',
-    height: 48,
+  viewSearch: {
     flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    paddingHorizontal: 10,
     borderRadius: 10,
-    width: 298,
-  },
-  styleButton: {
-    height: 48,
-    width: 48,
-    marginLeft: 10,
-    borderWidth: 2,
-    borderColor: 'white',
-    borderRadius: 10,
-  },
-  styleIcon: {height: 40, width: 40, tintColor: 'white'},
-  styleIconLeft: {
-    width: 25,
-    height: 25,
-    tintColor: colors.mainColor,
-    marginLeft: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    elevation: 10,
   },
 });
 export default CustomSearchAppBar;

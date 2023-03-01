@@ -12,438 +12,232 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import CustomButton from '../../Components/CustomButton';
-import CustomSearchAppBar from '../../Components/CustomSearchAppBar';
-import {colors, icons, images, svgs} from '../../Constants';
-import Contract from '../../Assets/Svgs/Contract.svg';
-import Gear from '../../Assets/Svgs/Gear.svg';
-import Document from '../../Assets/Svgs/Document.svg';
-import Utilities from '../../Assets/Svgs/Utilities.svg';
-import Bed from '../../Assets/Svgs/Bed.svg';
-import Wallet from '../../Assets/Svgs/Wallet.svg';
+import CustomAppBarHome from '../../Components/CustomAppBarHome';
+import CustomTitle from '../../Components/CustomTitle';
+import {colors, icons, images} from '../../Constants';
+import FileDocument from '../../Assets/Svgs/FileDocument.svg';
 import Water from '../../Assets/Svgs/Water.svg';
+import Bill from '../../Assets/Svgs/Bill.svg';
+import Hammer from '../../Assets/Svgs/Hammer.svg';
+import Peoples from '../../Assets/Svgs/Peoples.svg';
+import {FlatList} from 'react-native-gesture-handler';
+import CustomLoading from '../../Components/CustomLoading';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [keyboard, setKeyboard] = useState(false);
-  const [textSearch, setTextSearch] = useState('');
-  const widthImage = Dimensions.get('window').width / 2 - 20;
-  useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', () => {
-      setKeyboard(true);
-    });
-    Keyboard.addListener('keyboardDidHide', () => {
-      setKeyboard(false);
-    });
-  }, []);
+  const [listContract, setListContract] = useState([
+    {
+      contractCode: '#123465',
+      duration: '10/02/2023-10/02/2025',
+      buildingName: 'P101 - Tòa nhà D2',
+      address: '448 Lê văn Việt, Tăng Nhơn Phú A, TP. Thủ Đức',
+    },
+    {
+      contractCode: '#999999',
+      duration: '10/02/2025-Không xác định',
+      buildingName: 'P105 - Tòa nhà MYHIRO B',
+      address: '28 Nguyễn Huệ - Ngọc Trạo - Bỉm Sơn - Thanh Hóa',
+    },
+  ]);
+  const renderListContract = (item, index) => {
+    return (
+      <View style={styles.renderViewContract}>
+        <Image
+          source={images.im_backgroundRoom}
+          style={styles.imageContract}
+          resizeMode={'cover'}
+        />
+
+        <View style={styles.viewRowContract}>
+          <View style={styles.viewBackgroundContract}>
+            <Text style={{fontSize: 11, color: '#374047'}}>
+              {item?.contractCode}
+            </Text>
+          </View>
+          <View style={styles.viewBackgroundContract}>
+            <Text style={{fontSize: 11, color: '#374047'}}>
+              {item?.duration}
+            </Text>
+          </View>
+        </View>
+
+        <View style={{height: 62, padding: 10}}>
+          <View style={styles.viewAddressContract}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image source={icons.ic_home} style={styles.iconContract} />
+              <Text style={{fontSize: 13, fontWeight: '600', color: '#374047'}}>
+                {item?.buildingName}
+              </Text>
+            </View>
+            <Text style={{fontSize: 11, color: '#374047'}}>
+              {item?.address}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const [loading, setLoading] = useState(false);
+
   return (
     <View style={styles.container}>
-      <CustomSearchAppBar
-        iconLeft={icons.ic_menu}
-        label={'Trang chủ'}
-        iconRight={icons.ic_bell}
-        iconSecondRight={icons.ic_circleFill}
-        keyboard={keyboard}
-        textSearch={textSearch}
-        value={textSearch}
-        onChangeText={text => setTextSearch(text)}
-        placeholder={'Tìm kiếm...'}
-      />
+      {loading && <CustomLoading />}
+      <CustomAppBarHome />
       <ScrollView style={styles.eachContainer}>
-        <View style={styles.viewRow}>
-          <CustomViewButton
-            styleButton={{width: 175, height: 91}}
-            styleImageBG={{width: widthImage}}
-            imageBG={images.im_frame1}
-            icon={icons.ic_building}
-            label={'Số tòa nhà'}
-            labelNumber={'2'}
-            onPress={() => navigation.navigate('BuildingManager')}
-          />
-
-          <CustomViewButton
-            styleButton={{width: widthImage}}
-            styleImageBG={{width: widthImage}}
-            imageBG={images.im_frame2}
-            icon={icons.ic_appartment}
-            label={'Tổng số phòng'}
-            labelNumber={'34'}
-            onPress={async () => {
-              await AsyncStorage.setItem('token', '').then(() => {
-                navigation.navigate('LoginNavigation');
-              });
-            }}
-          />
-        </View>
-        <View style={[styles.viewRow, {marginTop: 20}]}>
-          <CustomViewButton
-            styleButton={{width: widthImage}}
-            styleImageBG={{width: widthImage}}
-            imageBG={images.im_frame3}
-            icon={icons.ic_peoples}
-            label={'Tổng số người'}
-            labelNumber={'41'}
-          />
-          <CustomViewButton
-            styleButton={{width: widthImage}}
-            styleImageBG={{width: widthImage}}
-            imageBG={images.im_frame4}
-            icon={icons.ic_hause}
-            label={'Phòng trống'}
-            labelNumber={'3'}
-          />
-        </View>
-        <View style={styles.viewOption}>
-          <Text style={styles.title}>Quản lý cho thuê</Text>
-          <View style={[styles.viewRow, {marginTop: 15}]}>
-            <CustomOptionBT
-              title={'Hợp đồng'}
-              content={'8'}
-              svgIcon={Contract}
-              styleImageBG={{tintColor: '#1297c0'}}
-              styleBGIcon={{backgroundColor: '#ebf9fd'}}
-              onPress={() => navigation.navigate('ContractManagement')}
-            />
-            <CustomOptionBT
-              title={'Công việc'}
-              content={'12'}
-              svgIcon={Gear}
-              styleImageBG={{tintColor: '#ff8d37'}}
-              styleBGIcon={{backgroundColor: '#fff3e9'}}
-            />
-            <CustomOptionBT
-              title={'Hóa đơn'}
-              content={'20'}
-              svgIcon={Document}
-              styleImageBG={{tintColor: '#7ace68'}}
-              styleBGIcon={{backgroundColor: '#e6f6e2'}}
-              onPress={() => navigation.navigate('BillManagement')}
-            />
-          </View>
-          <View style={[styles.viewRow, {marginTop: 15}]}>
-            <CustomOptionBT
-              title={'Dịch vụ'}
-              svgIcon={Utilities}
-              styleImageBG={{tintColor: '#21bab5'}}
-              styleBGIcon={{backgroundColor: '#edfcfb'}}
-              onPress={() => navigation.navigate('ServiceManager')}
-            />
-            <CustomOptionBT
-              title={'Tiện ích'}
-              svgIcon={Bed}
-              styleImageBG={{tintColor: '#21bab5'}}
-              styleBGIcon={{backgroundColor: '#edfcfb'}}
-              onPress={() => navigation.navigate('UtilitiesManager')}
-            />
-            <CustomOptionBT
-              title={'Thanh toán'}
-              svgIcon={Wallet}
-              styleImageBG={{tintColor: '#21bab5'}}
-              styleBGIcon={{backgroundColor: '#edfcfb'}}
-            />
-            <CustomOptionBT
-              title={'Điện-nước'}
-              svgIcon={Water}
-              styleImageBG={{tintColor: '#21bab5'}}
-              styleBGIcon={{backgroundColor: '#edfcfb'}}
-            />
-          </View>
-        </View>
-        <View style={[styles.viewRow, {marginTop: 15, marginBottom: 10}]}>
-          <Text style={styles.textTitle}>Công việc</Text>
-          <CustomButton
-            label={'Xem tất cả >'}
-            styleLabel={{color: '#645cbb', fontSize: 12}}
-            onPress={() => {}}
-          />
-        </View>
-
-        <View style={[styles.viewRow, {marginBottom: 10}]}>
+        <View style={styles.viewContract}>
+          <CustomTitle label={'Hợp đồng'} />
           <View
-            style={{
-              height: 120,
-              alignItems: 'center',
-              marginRight: 10,
-            }}>
-            <View
-              style={{
-                width: 0,
-                backgroundColor: 'grey',
-                flex: 1,
-              }}
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <FlatList
+              style={{height: 150, width: 350}}
+              pagingEnabled={true}
+              horizontal
+              data={listContract}
+              keyExtractor={key => key.contractCode}
+              renderItem={({item, index}) => renderListContract(item, index)}
             />
-            <Image
-              source={icons.ic_circle}
-              style={{
-                width: 30,
-                height: 30,
-                tintColor: colors.mainColor,
-                margin: 5,
-              }}
-            />
-            <View style={{width: 2, backgroundColor: 'grey', flex: 1}} />
-          </View>
-          <View
-            style={{
-              flex: 1,
-              height: 120,
-              backgroundColor: '#cff0fb',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 10}}>Hợp đồng</Text>
-              <Text style={{fontSize: 10}}>14:00 01-02-2023</Text>
-            </View>
-            <Text>Có hợp đồng sắp đến hạn</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 10}}>Tòa nhà D2 - Tầng 1 - P101</Text>
-              <Text style={{fontSize: 10}}>Số HĐ : #123465</Text>
-            </View>
           </View>
         </View>
-
-        <View style={[styles.viewRow, {marginBottom: 10}]}>
-          <View style={{height: 120, alignItems: 'center', marginRight: 10}}>
-            <View style={{width: 2, backgroundColor: 'grey', flex: 1}} />
-            <Image
-              source={icons.ic_circle}
-              style={{
-                width: 30,
-                height: 30,
-                tintColor: colors.mainColor,
-                margin: 5,
-              }}
+        <View style={styles.viewManage}>
+          <CustomTitle label={'Quản lý'} />
+          <View style={[styles.viewRow, {marginTop: 10}]}>
+            <CustomButtonManager
+              iconSVG={FileDocument}
+              label={'Hợp đồng'}
+              onPress={() => navigation.navigate('ContractScreen')}
             />
-            <View style={{width: 2, backgroundColor: 'grey', flex: 1}} />
-          </View>
-          <View
-            style={{
-              flex: 1,
-              height: 120,
-              backgroundColor: '#fff3e9',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 10}}>Hợp đồng</Text>
-              <Text style={{fontSize: 10}}>14:00 01-02-2023</Text>
-            </View>
-            <Text>Có hợp đồng sắp đến hạn</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 10}}>Tòa nhà D2 - Tầng 1 - P101</Text>
-              <Text style={{fontSize: 10}}>Số HĐ : #123465</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={[styles.viewRow, {marginBottom: 60}]}>
-          <View style={{height: 150, alignItems: 'center', marginRight: 10}}>
-            <View style={{width: 2, backgroundColor: 'grey', flex: 1}} />
-            <Image
-              source={icons.ic_circle}
-              style={{
-                width: 30,
-                height: 30,
-                tintColor: colors.mainColor,
-                margin: 5,
-              }}
+            <CustomButtonManager
+              iconSVG={Bill}
+              label={'Hóa đơn'}
+              onPress={() => {}}
             />
-            <View style={{width: 0, backgroundColor: 'grey', flex: 1}} />
+            <CustomButtonManager
+              iconSVG={Water}
+              label={'Điện-nước'}
+              onPress={() => {}}
+            />
+            <CustomButtonManager
+              iconSVG={Hammer}
+              label={'Sự cố'}
+              onPress={() => {}}
+            />
           </View>
-          <View
-            style={{
-              flex: 1,
-              height: 120,
-              backgroundColor: '#e6f6e2',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 10}}>Hợp đồng</Text>
-              <Text style={{fontSize: 10}}>14:00 01-02-2023</Text>
-            </View>
-            <Text>Có hợp đồng sắp đến hạn</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 10}}>Tòa nhà D2 - Tầng 1 - P101</Text>
-              <Text style={{fontSize: 10}}>Số HĐ : #123465</Text>
-            </View>
+          <View style={[styles.viewRow, {marginTop: 10}]}>
+            <CustomButtonManager
+              iconSVG={Peoples}
+              label={'Liên kết'}
+              onPress={() => {}}
+            />
           </View>
         </View>
       </ScrollView>
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  eachContainer: {
-    flex: 1,
-    paddingHorizontal: 10,
-    backgroundColor: colors.backgroundGrey,
-    paddingTop: 30,
-  },
-  viewRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    justifyContent: 'space-between',
-  },
-  viewOption: {
-    width: '100%',
-    marginTop: 30,
-    borderRadius: 10,
-    zIndex: 1,
-    elevation: 1,
-    backgroundColor: 'white',
-    margin: 2,
-    padding: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
 
-    elevation: 4,
-  },
-  title: {fontSize: 17, fontWeight: 'bold', color: 'black'},
-  textTitle: {fontSize: 17, fontWeight: 'bold', color: '#163a5f'},
-});
-
-const CustomViewButton = props => {
-  const {
-    imageBG,
-    styleImageBG,
-    styleButton,
-    icon,
-    label,
-    labelNumber,
-    onPress,
-  } = props;
-
-  return (
-    <TouchableOpacity style={[styleBT.button, styleButton]} onPress={onPress}>
-      <Image
-        source={imageBG}
-        style={[styleBT.image, styleImageBG]}
-        resizeMode={'cover'}
-      />
-      <View style={styles.viewRow}>
-        <View style={styleBT.viewIcon}>
-          <Image source={icon} />
-        </View>
-        <Text style={styleBT.labelNumber}>{labelNumber}</Text>
-      </View>
-      <Text style={styleBT.label}>{label}</Text>
-    </TouchableOpacity>
-  );
-};
-const styleBT = StyleSheet.create({
-  button: {
-    height: 91,
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-    width: 175,
-    borderRadius: 10,
-  },
-  image: {height: 91, position: 'absolute', borderRadius: 10},
-  viewIcon: {
-    width: 32,
-    height: 32,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 32,
-  },
-  labelNumber: {
-    color: '#374047',
-    fontWeight: '600',
-    fontSize: 22,
-  },
-  label: {
-    color: '#374047',
-    fontWeight: 'bold',
-    fontSize: 14,
-    marginTop: 5,
-  },
-});
-const CustomOptionBT = props => {
-  const {
-    icon,
-    styleImageBG,
-    styleButton,
-    styleBGIcon,
-    title,
-    content,
-    onPress,
-    svgIcon,
-  } = props;
-  const ItemSvg = svgIcon;
+const CustomButtonManager = props => {
+  const {iconSVG, label, onPress} = props;
+  let IconItem = iconSVG;
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styleOption.button, styleButton]}>
-      <View style={[styleOption.backgroundIcon, styleBGIcon]}>
-        {icon && (
-          <Image
-            style={[styleOption.icon, styleImageBG]}
-            source={icon}
-            resizeMode={'contain'}
-          />
-        )}
-        {svgIcon && <ItemSvg height={24} width={24} />}
+      style={{
+        height: 72,
+        width: 85,
+        alignItems: 'center',
+      }}>
+      <View style={styles.viewAroundItem}>
+        {iconSVG && <IconItem width={24} height={24} fill={'#21BAB5'} />}
       </View>
-      {title && <Text style={styleOption.title}>{title}</Text>}
-      {content && <Text style={styleOption.content}>{content}</Text>}
+      {label && <Text style={{fontSize: 11, color: '#7F8A93'}}>{label}</Text>}
     </TouchableOpacity>
   );
 };
-const styleOption = StyleSheet.create({
-  button: {
-    width: 90,
-    alignItems: 'center',
-    paddingHorizontal: 10,
+
+const styles = StyleSheet.create({
+  container: {flex: 1, backgroundColor: colors.backgroundGrey},
+  eachContainer: {flex: 1, paddingHorizontal: 10, paddingTop: 20},
+  viewContract: {
+    backgroundColor: 'white',
+    height: 216,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+    margin: 5,
+    padding: 5,
   },
-  icon: {height: 24, width: 24},
-  title: {fontSize: 9, color: 'grey', textAlign: 'center'},
-  content: {fontSize: 14, fontWeight: 'bold', color: 'black'},
-  backgroundIcon: {
+  viewManage: {
+    backgroundColor: 'white',
+    height: 236,
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+    margin: 5,
+    padding: 5,
+    marginTop: 20,
+  },
+  viewRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  viewAroundItem: {
     width: 48,
     height: 48,
+    backgroundColor: '#EDFCFB',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
+  },
+  renderViewContract: {
+    overflow: 'hidden',
+    width: 350,
+    height: 150,
+    alignSelf: 'center',
+    borderRadius: 10,
+  },
+  imageContract: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    alignSelf: 'center',
+  },
+  viewRowContract: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  viewBackgroundContract: {
+    backgroundColor: 'white',
+    borderRadius: 4,
+    paddingHorizontal: 5,
+  },
+  viewAddressContract: {
+    minHeight: 62,
+    width: '100%',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    padding: 5,
+  },
+  iconContract: {
+    width: 20,
+    height: 20,
+    tintColor: '#374047',
+    marginRight: 5,
   },
 });
 
