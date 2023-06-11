@@ -95,7 +95,7 @@ android {
 
     namespace 'com.homy'
     defaultConfig {
-        applicationId 'com.homy'
+        applicationId 'com.homy.mate'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
